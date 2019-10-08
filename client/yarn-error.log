@@ -1,5 +1,5 @@
 Arguments: 
-  F:\nodejs\node.exe F:\nodejs\node_modules\yarn\bin\yarn.js add @taro/mobx
+  F:\nodejs\node.exe F:\nodejs\node_modules\yarn\bin\yarn.js add @tarojs/mobx/types/index --silent --no-progress
 
 PATH: 
   C:\windows;C:\windows\system32;C:\windows\System32;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;F:\软件APP\nodejs\;L:\jdk1.8\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;F:\heroku\bin;L:\ffmpeg-20190308-9645147-win64-static\bin;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;C:\Users\Administrator\AppData\Local\Programs\Fiddler;L:\flutter\bin;L:\android_sdk\platform-tools;L:\android_sdk\build-tools\28.0.3;L:\hack\Nmap;J:\python;F:\nodejs;F:\软件APP\Git\bin
@@ -14,15 +14,15 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/@taro%2fmobx: Not found
+  Error: https://registry.npm.taobao.org/@tarojs%2fmobx/types/index: [not_found] document not found
       at Request.params.callback [as _callback] (F:\nodejs\node_modules\yarn\lib\cli.js:66830:18)
       at Request.self.callback (F:\nodejs\node_modules\yarn\lib\cli.js:140464:22)
       at Request.emit (events.js:182:13)
       at Request.<anonymous> (F:\nodejs\node_modules\yarn\lib\cli.js:141436:10)
       at Request.emit (events.js:182:13)
-      at IncomingMessage.<anonymous> (F:\nodejs\node_modules\yarn\lib\cli.js:141358:12)
+      at Gunzip.<anonymous> (F:\nodejs\node_modules\yarn\lib\cli.js:141358:12)
       at Object.onceWrapper (events.js:273:13)
-      at IncomingMessage.emit (events.js:187:15)
+      at Gunzip.emit (events.js:187:15)
       at endReadableNT (_stream_readable.js:1081:12)
       at process._tickCallback (internal/process/next_tick.js:63:19)
 
@@ -55,6 +55,7 @@ npm manifest:
     "license": "MIT",
     "dependencies": {
       "@tarojs/components": "1.3.19",
+      "@tarojs/mobx": "^1.3.19",
       "@tarojs/redux": "^1.3.19",
       "@tarojs/router": "1.3.19",
       "@tarojs/taro": "1.3.19",
@@ -63,6 +64,7 @@ npm manifest:
       "@tarojs/taro-swan": "1.3.19",
       "@tarojs/taro-tt": "1.3.19",
       "@tarojs/taro-weapp": "1.3.19",
+      "mobx": "^5.14.0",
       "nerv-devtools": "^1.4.0",
       "nervjs": "^1.4.0"
     },
@@ -192,6 +194,19 @@ Lockfile:
       resolve-pathname "^3.0.0"
       swiper "^4.4.2"
       weui "^1.1.2"
+  
+  "@tarojs/mobx-common@1.3.19":
+    version "1.3.19"
+    resolved "https://registry.npm.taobao.org/@tarojs/mobx-common/download/@tarojs/mobx-common-1.3.19.tgz#dd7e195120e28f5aa828bc8a24db2cde318dc518"
+    integrity sha1-3X4ZUSDij1qoKLyKJNss3jGNxRg=
+  
+  "@tarojs/mobx@^1.3.19":
+    version "1.3.19"
+    resolved "https://registry.npm.taobao.org/@tarojs/mobx/download/@tarojs/mobx-1.3.19.tgz#bf344ee251f7a3b9dea36736ebafeb9ea02818f4"
+    integrity sha1-vzRO4lH3o7neo2c266/rnqAoGPQ=
+    dependencies:
+      "@tarojs/mobx-common" "1.3.19"
+      "@tarojs/taro" "1.3.19"
   
   "@tarojs/plugin-babel@1.3.19":
     version "1.3.19"
@@ -3998,11 +4013,6 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/image-size/download/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
     integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
   
-  immer@^3.1.2:
-    version "3.3.0"
-    resolved "https://registry.npm.taobao.org/immer/download/immer-3.3.0.tgz#ee7cf3a248d5dd2d4eedfbe7dfc1e9be8c72041d"
-    integrity sha1-7nzzokjV3S1O7fvn38HpvoxyBB0=
-  
   import-cwd@^2.0.0:
     version "2.1.0"
     resolved "https://registry.npm.taobao.org/import-cwd/download/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
@@ -4795,7 +4805,7 @@ Lockfile:
       es6-symbol "^3.1.1"
       object.assign "^4.1.0"
   
-  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
+  loose-envify@^1.0.0, loose-envify@^1.4.0:
     version "1.4.0"
     resolved "https://registry.npm.taobao.org/loose-envify/download/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
     integrity sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=
@@ -5105,6 +5115,11 @@ Lockfile:
     version "1.4.4"
     resolved "https://registry.npm.taobao.org/mobile-detect/download/mobile-detect-1.4.4.tgz#686c74e92d3cc06b09a9b3594b7b981494b137f6"
     integrity sha1-aGx06S08wGsJqbNZS3uYFJSxN/Y=
+  
+  mobx@^5.14.0:
+    version "5.14.0"
+    resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.14.0.tgz#357c1023aca2851df357fa0cb9a6eaaab3a57793"
+    integrity sha1-NXwQI6yihR3zV/oMuabqqrOld5M=
   
   move-concurrently@^1.0.1:
     version "1.0.1"
@@ -6059,7 +6074,7 @@ Lockfile:
     dependencies:
       asap "~2.0.6"
   
-  prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.6.1, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
@@ -6215,29 +6230,10 @@ Lockfile:
       minimist "^1.2.0"
       strip-json-comments "~2.0.1"
   
-  react-dom@^16.10.2:
-    version "16.10.2"
-    resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.10.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.10.2.tgz#4840bce5409176bc3a1f2bd8cb10b92db452fda6"
-    integrity sha1-SEC85UCRdrw6HyvYyxC5LbRS/aY=
-    dependencies:
-      loose-envify "^1.1.0"
-      object-assign "^4.1.1"
-      prop-types "^15.6.2"
-      scheduler "^0.16.2"
-  
   react-is@^16.8.1:
     version "16.10.2"
     resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.10.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
     integrity sha1-mEEg/U0WgA6ac4IIqx+6Qi0jtas=
-  
-  react@^16.10.2:
-    version "16.10.2"
-    resolved "https://registry.npm.taobao.org/react/download/react-16.10.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.10.2.tgz#a5ede5cdd5c536f745173c8da47bda64797a4cf0"
-    integrity sha1-pe3lzdXFNvdFFzyNpHvaZHl6TPA=
-    dependencies:
-      loose-envify "^1.1.0"
-      object-assign "^4.1.1"
-      prop-types "^15.6.2"
   
   read-pkg-up@^1.0.1:
     version "1.0.1"
@@ -6674,14 +6670,6 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/sax/download/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
     integrity sha1-KBYjTiN4vdxOU1T6tcqold9xANk=
   
-  scheduler@^0.16.2:
-    version "0.16.2"
-    resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.16.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fscheduler%2Fdownload%2Fscheduler-0.16.2.tgz#f74cd9d33eff6fc554edfb79864868e4819132c1"
-    integrity sha1-90zZ0z7/b8VU7ft5hkho5IGRMsE=
-    dependencies:
-      loose-envify "^1.1.0"
-      object-assign "^4.1.1"
-  
   schema-utils@^0.4.0, schema-utils@^0.4.4, schema-utils@^0.4.5:
     version "0.4.7"
     resolved "https://registry.npm.taobao.org/schema-utils/download/schema-utils-0.4.7.tgz?cache=0&sync_timestamp=1569583621807&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fschema-utils%2Fdownload%2Fschema-utils-0.4.7.tgz#ba74f597d2be2ea880131746ee17d0a093c68187"
@@ -7078,14 +7066,6 @@ Lockfile:
     integrity sha1-KjxBso3UW2K2Nnbst0ABJlrp7dg=
     dependencies:
       figgy-pudding "^3.5.1"
-  
-  stamen@^1.12.0:
-    version "1.12.0"
-    resolved "https://registry.npm.taobao.org/stamen/download/stamen-1.12.0.tgz#49bb7b36fc093f121765d9086ce03fe4649bc14f"
-    integrity sha1-Sbt7NvwJPxIXZdkIbOA/5GSbwU8=
-    dependencies:
-      fast-deep-equal "^2.0.1"
-      immer "^3.1.2"
   
   static-extend@^0.1.1:
     version "0.1.2"

@@ -3,11 +3,11 @@ import Taro, { Component } from '@tarojs/taro'
 import counterStore from './store/counter'
 
 import Index from './pages/index'
+import Cate  from './pages/cate/cate'
 import Listpage from './pages/listpage'
 
 import { Provider } from '@tarojs/mobx'
 import './app.css'
-import {inject} from "@tarojs/mobx/types/index";
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -25,6 +25,7 @@ class App extends Component {
  //在路由修改首页，放在前面的就是首页，组件不要放在路由里
   config = {
     pages: [
+      'pages/cate/cate',
       'pages/index'
 
     ],

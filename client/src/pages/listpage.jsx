@@ -6,11 +6,7 @@ import { connect } from '@tarojs/redux'
 
 import Login from '../components/login/index'
 
-import { createStore } from 'stamen'
 
-
-
-//const counter = useStore(S => S.count)
 
 
 
@@ -23,7 +19,6 @@ class Listpage extends Component {
   componentWillMount () { }
 
   componentDidMount () {
-    console.log(this.props.counter)
   }
 
   componentWillUnmount () { }
