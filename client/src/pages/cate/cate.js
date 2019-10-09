@@ -9,7 +9,6 @@ import List from './list'
 import Banner from './banner'
 import './cate.scss'
 import {inject, observer} from "@tarojs/mobx";
-import catedb from  '../../store/category.json'
 
 @inject( 'counterStore')  //将方法注入到组件的porps中，通过this.props访问
 @observer
@@ -26,10 +25,14 @@ class Cate extends Component {
 
   componentDidMount() {
 
-      this.setState({
-        loaded: true,
-        current: catedb[0].id
+      this.props.counterStore.getcate().then((res)=>{
+       this.setState({
+              loaded: true,
+              current: res[0].id
+            })
       })
+
+
   }
 
   handleMenu = (id) => {
@@ -38,10 +41,13 @@ class Cate extends Component {
     })
   }
 
+  getcate =() =>{
+    this.props.counterStore.getcate()
+  }
+
   render () {
+    const {counterStore: { menu, category}  } = this.props
     const { current, loading } = this.state
-    const menu = catedb.map(({ id, name }) => ({ id, name }))
-    const category=catedb
     const currentCategory = category.find(item => item.id === current) || {}
     const banner = currentCategory.focusBannerList || []
     const list = currentCategory.categoryGroupList || []

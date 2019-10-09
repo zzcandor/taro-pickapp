@@ -5,6 +5,7 @@ import counterStore from './store/counter'
 import Index from './pages/index'
 import Cate  from './pages/cate/cate'
 import Listpage from './pages/listpage'
+import '@tarojs/async-await'
 
 import { Provider } from '@tarojs/mobx'
 import './app.css'

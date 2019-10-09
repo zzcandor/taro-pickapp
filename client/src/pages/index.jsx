@@ -24,7 +24,7 @@ class Index extends Component {
 
   componentDidHide () { }
 
-  //先把store中的方法
+  //先把store中的方法引入
   increment = () => {
     const { counterStore } = this.props
     counterStore.increment()
@@ -38,6 +38,10 @@ class Index extends Component {
   incrementAsync = () => {
     const { counterStore } = this.props
     counterStore.incrementAsync()
+  }
+
+  getcate =() =>{
+    this.props.counterStore.getcate()
   }
 
   render () {
