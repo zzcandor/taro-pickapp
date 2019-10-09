@@ -24,7 +24,6 @@ class Cate extends Component {
   }
 
   componentDidMount() {
-
       this.props.counterStore.getcate().then((res)=>{
        this.setState({
               loaded: true,
@@ -46,7 +45,7 @@ class Cate extends Component {
   }
 
   render () {
-    const {counterStore: { menu, category}  } = this.props
+    const {counterStore: { menu, category}  } = this.props  //这里是双重解构写法
     const { current, loading } = this.state
     const currentCategory = category.find(item => item.id === current) || {}
     const banner = currentCategory.focusBannerList || []
