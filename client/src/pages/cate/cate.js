@@ -40,10 +40,6 @@ class Cate extends Component {
     })
   }
 
-  getcate =() =>{
-    this.props.counterStore.getcate()
-  }
-
   render () {
     const {counterStore: { menu, category}  } = this.props  //这里是双重解构写法
     const { current, loading } = this.state
