@@ -49,6 +49,7 @@ export default class Profile extends Component {
         this.setState({isOpened:false,userinfo:{},loginstate:false,})
         const  clearinfo={}
         this.props.counterStore.updateuserinfo(clearinfo,false)
+        Taro.removeStorageSync('userInfo')
     }
 
 

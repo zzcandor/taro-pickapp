@@ -12,7 +12,12 @@ class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  componentWillMount () {
+    Taro.getStorage({key:'userInfo'}).then(rst => {   //从缓存中获取用户信息
+        this.props.counterStore.localtost(rst.data)
+    }).catch(err=>{console.log(err)
+    })
+  }
 
   componentDidMount () { }
 

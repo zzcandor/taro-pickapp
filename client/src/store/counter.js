@@ -6,6 +6,13 @@ const counterStore = observable({
   menu:[],
   userinfost:{},
   loginstatest:false,
+  localtost(localinfo){
+    this.userinfost=localinfo
+    if (localinfo){
+      this.loginstatest=true
+    }
+    console.log('本地存储的用户信息为',this.userinfost)
+  },
   updateuserinfo(newinfo,loginstate){
     this.userinfost=newinfo
     this.loginstatest=loginstate

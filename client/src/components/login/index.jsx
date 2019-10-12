@@ -58,10 +58,7 @@ export default class Login extends Component {
         nickName:userInfo.detail.userInfo.nickName
       });
         if(userInfo.detail.userInfo){   //同意
-            Taro.setStorage({key:'userInfo',data:userInfo.detail.userInfo}).then(rst => {  //将用户信息存入缓存中
-           console.log(rst.data)
-              //Taro.navigateBack()
-            })
+            Taro.setStorage({key:'userInfo',data:userInfo.detail.userInfo})  //保存到本地缓存
         } else{ //拒绝,保持当前页面，直到同意
         }
     }
