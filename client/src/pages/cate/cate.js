@@ -1,8 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, ScrollView } from '@tarojs/components'
 import { Loading } from '@components'
-import { connect } from '@tarojs/redux'
-import * as actions from '@actions/cate'
 import { getWindowHeight } from '@utils/style'
 import Menu from './menu'
 import List from './list'
@@ -27,10 +25,15 @@ class Cate extends Component {
       this.props.counterStore.getcate().then((res)=>{
        this.setState({
               loaded: true,
-              current: res[0].id
+              current: res[0].id,
+              userinfo:this.props.counterStore.userinfost
             })
       })
 
+
+  }
+
+  componentWillUpdate(){
 
   }
 
@@ -41,7 +44,8 @@ class Cate extends Component {
   }
 
   render () {
-    const {counterStore: { menu, category}  } = this.props  //这里是双重解构写法
+    const {counterStore: { menu, category,userinfost }} = this.props  //这里是双重解构写法
+    console.log('渲染时的状态',userinfost)
     const { current, loading } = this.state
     const currentCategory = category.find(item => item.id === current) || {}
     const banner = currentCategory.focusBannerList || []

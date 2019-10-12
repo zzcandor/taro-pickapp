@@ -1,0 +1,40 @@
+@import "@styles/theme.scss";
+
+.user {
+  position: relative;
+}
+
+.user__wrap {
+  background: #f4f4f4;
+}
+
+.user__logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+  height: 20px;
+  background: $white;
+
+  &-txt {
+    color: #333;
+    font-size: 25px;
+    line-height: 25px;
+    margin-left: 0px;
+  }
+}
+
+.user__empty {
+  height: 20px;
+}
+
+.login {
+  height: 15px;
+}
+
+.user__activity {
+  position: absolute;
+  right: 30px;
+  bottom: 60px;
+}

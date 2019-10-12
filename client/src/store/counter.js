@@ -4,6 +4,12 @@ import { axios } from 'taro-axios'
 const counterStore = observable({
   category:[], //注意这里是集合不要{}字典！
   menu:[],
+  userinfost:{},
+  loginstatest:false,
+  updateuserinfo(newinfo,loginstate){
+    this.userinfost=newinfo
+    this.loginstatest=loginstate
+  },
   getcate(){
     return axios.get('https://miniapp.you.163.com//xhr/list/category.json')
     //使用return返回promise方便在componentDidMount中调用
