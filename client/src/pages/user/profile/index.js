@@ -26,6 +26,13 @@ export default class Profile extends Component {
         nickName:userInfo.detail.userInfo.nickName,
         loginstate:true
       });
+        Taro.cloud.callFunction({name: "login", data: {}})
+            .then(res => {
+              const openid=res.result.event.userInfo.openId
+              this.setState({openid: openid});
+              this.props.counterStore.updateid(openid);
+              console.log("用户ID为",openid)})
+      //调用云函数获取appid
         this.props.counterStore.updateuserinfo(userInfo.detail.userInfo,true)  //更新mobx的状态
         console.log(this.props.counterStore.userinfost.nickName)
         if(userInfo.detail.userInfo){   //同意

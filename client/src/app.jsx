@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 
-import counterStore from './store/counter'
+import {counterStore,cartstore} from './store/counter'
+
 
 import Index from './pages/index'
 import Cate  from './pages/cate/cate'
@@ -19,15 +20,17 @@ import './app.scss'
 
 //在app中引入store,可以引入多个store，使用时@inject( 'counterStore')指明store即可
 const store = {
-  counterStore
+  counterStore:counterStore,
+  cartstore:cartstore
 }
 
 class App extends Component {
  //在路由修改首页，放在前面的就是首页，组件不要放在路由里
   config = {
     pages: [
-      'pages/cate/cate',
+      'pages/cart/cart',
       'pages/index',
+      'pages/cate/cate',
       'pages/user/user',
 
     ],
@@ -43,7 +46,7 @@ class App extends Component {
       backgroundColor: "#fafafa",
       borderStyle: 'black',
       list: [{
-        pagePath: "pages/index",
+        pagePath: "pages/cart/cart",
         iconPath: "./assets/tab-bar/home.png",
         selectedIconPath: "./assets/tab-bar/home-active.png",
         text: "首页"

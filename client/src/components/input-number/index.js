@@ -6,9 +6,12 @@ import minusDisabledIcon from './assets/minus-disabled.png'
 import plusIcon from './assets/plus.png'
 import './index.scss'
 
+
+
 export default class InputNumber extends Component {
   static defaultProps = {
     num: 0,
+    itemid:'',
     compStyle: '',
     optStyle: '',
     numStyle: '',
@@ -17,12 +20,14 @@ export default class InputNumber extends Component {
 
   handleMinus = () => {
     if (this.props.num > 1) {
-      this.props.onChange(this.props.num - 1)
+      const newnum=this.props.num - 1
+      this.props.onChange(this.props.itemid,newnum)
     }
   }
 
   handlePlus = () => {
-    this.props.onChange(this.props.num + 1)
+    const newnum=this.props.num + 1
+    this.props.onChange(this.props.itemid,newnum)
   }
 
   render () {

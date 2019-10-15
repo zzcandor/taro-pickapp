@@ -2,7 +2,10 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { CheckboxItem, InputNumber } from '@components'
 import './index.scss'
+import {inject, observer} from "@tarojs/mobx";
 
+@inject( 'cartstore')  //将方法注入到组件的porps中，通过this.props访问
+@observer
 export default class List extends Component {
   static defaultProps = {
     list: [],
@@ -11,33 +14,23 @@ export default class List extends Component {
   }
 
   getBaseItem = (item) => ({
-    skuId: item.skuId,
-    type: item.type,
-    extId: item.extId,
+
+    id: item.id,
     cnt: item.cnt,
     checked: item.checked,
-    canCheck: true,
-    promId: this.props.promId,
-    promType: this.props.promType
+    cancheck: true,
   })
 
-  handleUpdate = (item, cnt) => {
-    const payload = {
-      skuList: [{ ...this.getBaseItem(item), cnt }]
-    }
-    this.props.onUpdate(payload)
+  handleUpdate = (itemid, cnt) => {
+    console.log("更新数量为",cnt)
+    this.props.cartstore.updatecount(itemid,cnt)
   }
 
-  handleUpdateCheck = (item) => {
-    const payload = {
-      skuList: [{ ...this.getBaseItem(item), checked: !item.checked }]
-    }
-    this.props.onUpdateCheck(payload)
+  handleUpdateCheck = (sid,checkstate) => {
+    this.props.cartstore.updatecheck(sid,checkstate)
   }
 
-  handleRemove = () => {
-    // XXX 暂未实现左滑删除
-  }
+
 
   render () {
     const { list } = this.props
@@ -50,8 +43,9 @@ export default class List extends Component {
           >
             <CheckboxItem
               checked={item.checked}
-              onClick={this.handleUpdateCheck.bind(this, item)}
+              onClick={this.handleUpdateCheck.bind(this, item.id,item.checked)}
             />
+            {/*更新购物车确认状态*/}
             <Image
               className='cart-list__item-img'
               src={item.pic}
@@ -79,8 +73,10 @@ export default class List extends Component {
                 <View className='cart-list__item-num'>
                   <InputNumber
                     num={item.cnt}
-                    onChange={this.handleUpdate.bind(this, item)}
+                    itemid={item.id}
+                    onChange={this.handleUpdate}
                   />
+                  {/*这里只传两个参数，InputNumber组件中已经写好再传入一个number变量*/}
                 </View>
               </View>
             </View>

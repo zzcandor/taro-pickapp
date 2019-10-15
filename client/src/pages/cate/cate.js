@@ -8,7 +8,7 @@ import Banner from './banner'
 import './cate.scss'
 import {inject, observer} from "@tarojs/mobx";
 
-@inject( 'counterStore')  //将方法注入到组件的porps中，通过this.props访问
+@inject('counterStore')  //将方法注入到组件的porps中，通过this.props访问
 @observer
 class Cate extends Component {
   config = {
@@ -22,6 +22,7 @@ class Cate extends Component {
   }
 
   componentDidMount() {
+    console.log('store信息',this.props.counterStore);
       this.props.counterStore.getcate().then((res)=>{
        this.setState({
               loaded: true,

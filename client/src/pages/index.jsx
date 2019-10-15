@@ -13,7 +13,7 @@ class Index extends Component {
   }
 
   componentWillMount () {
-    Taro.getStorage({key:'userInfo'}).then(rst => {   //从缓存中获取用户信息
+    Taro.getStorage({key:'userInfo'}).then(rst => {   //从缓存中获取用户信息存到mobx状态
         this.props.counterStore.localtost(rst.data)
     }).catch(err=>{console.log(err)
     })
