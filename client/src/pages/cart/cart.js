@@ -38,9 +38,12 @@ class Index extends Component {
       }
     })*/
   }
+  checkall=()=>{
+    this.props.cartstore.checkall(this.props.cartstore.allcheckstate)
+  }
 
   render () {
-    const {cartstore:{defaultcart}} = this.props//在这里导入数据
+    const {cartstore:{defaultcart,cartinfo}} = this.props//在这里导入数据
     //console.log(updatecount,updatecheck)
     //console.log("cartstore状态",cartstore)
     //const cartinfo = cartstore.cartinfo
@@ -75,8 +78,8 @@ class Index extends Component {
         {isShowFooter &&
           <View className='cart__footer'>
             <Footer
-              cartInfo={defaultcart}
-              onUpdateCheck={()=>{}}
+              cartInfo={cartinfo}
+              onUpdateCheck={this.checkall}
             />
           </View>
         }

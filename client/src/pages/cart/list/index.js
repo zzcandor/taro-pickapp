@@ -30,7 +30,7 @@ export default class List extends Component {
     this.props.cartstore.updatecheck(sid,checkstate)
   }
 
-
+  //在组件中匿名函数来传递整个函数，方便整个传递给子组件
 
   render () {
     const { list } = this.props

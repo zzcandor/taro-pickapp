@@ -27,11 +27,14 @@ const store = {
 class App extends Component {
  //在路由修改首页，放在前面的就是首页，组件不要放在路由里
   config = {
+    navigateToMiniProgramAppIdList: [
+    "wxd9634afb01b983c0"],
     pages: [
       'pages/cart/cart',
       'pages/index',
       'pages/cate/cate',
       'pages/user/user',
+      'pages/order/index'
 
     ],
     window: {
