@@ -1,3 +1,3 @@
 # taro-pickapp
 
-taro+mobx+小程序云开发 商城应用
+taro+mobx+微信云开发   商城应用小程序
