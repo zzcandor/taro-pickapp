@@ -22,18 +22,20 @@ const counterStore = observable({
     this.openid=id
   },
   getcate(){
-    return axios.get('https://miniapp.you.163.com//xhr/list/category.json')
+    return axios.get('https://raw.githubusercontent.com/blackjack0v0/source/master/qingqucate.json')
     //使用return返回promise方便在componentDidMount中调用
       .then(res => {
-           this.category=res.data.data.categoryList;
-           this.menu=res.data.data.categoryList.map(({ id, name }) => ({ id, name }))
+           this.category=res.data;
+           const newmenu=res.data.map(item=>item.title)
+           this.menu=newmenu
+           console.log(newmenu)
         //使用map函数来对集合中的对象{}操作时可以采用解构写法！
            //const menu2=res.data.data.categoryList.map(({ id, name }) => ({ id, name }))
            //this.menu=menu2
            //console.log("访问api后返回")
            //console.log(res.data.data.categoryList)
            //console.log(this.menu)
-           return  res.data.data.categoryList
+           return  res.data
          })
   }
 

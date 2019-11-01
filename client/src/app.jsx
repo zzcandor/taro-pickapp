@@ -49,15 +49,15 @@ class App extends Component {
       backgroundColor: "#fafafa",
       borderStyle: 'black',
       list: [{
-        pagePath: "pages/cart/cart",
+        pagePath: "pages/cate/cate",
         iconPath: "./assets/tab-bar/home.png",
         selectedIconPath: "./assets/tab-bar/home-active.png",
         text: "首页"
       }, {
-        pagePath: "pages/cate/cate",
-        iconPath: "./assets/tab-bar/cate.png",
-        selectedIconPath: "./assets/tab-bar/cate-active.png",
-        text: "分类"
+        pagePath: "pages/cart/cart",
+        iconPath: "./assets/tab-bar/cart.png",
+        selectedIconPath: "./assets/tab-bar/cart-active.png",
+        text: "购物车"
       }, {
         pagePath: "pages/user/user",
         iconPath: "./assets/tab-bar/user.png",

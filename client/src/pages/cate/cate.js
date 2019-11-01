@@ -16,7 +16,7 @@ class Cate extends Component {
   }
 
   state = {
-    current: -1,
+    current: 0,
     loaded: false,
     loading: false
   }
@@ -26,7 +26,6 @@ class Cate extends Component {
       this.props.counterStore.getcate().then((res)=>{
        this.setState({
               loaded: true,
-              current: res[0].id,
               userinfo:this.props.counterStore.userinfost
             })
       })
@@ -48,9 +47,12 @@ class Cate extends Component {
     const {counterStore: { menu, category,userinfost }} = this.props  //这里是双重解构写法
     console.log('渲染时的状态',userinfost)
     const { current, loading } = this.state
-    const currentCategory = category.find(item => item.id === current) || {}
+    //console.log("当前目录为",menu)
+    const currentCategory = category.find((item,index) => index === current) || {}
+    console.log("当前目录为",currentCategory,current)
     const banner = currentCategory.focusBannerList || []
-    const list = currentCategory.categoryGroupList || []
+    const list = currentCategory.detail || []
+    console.log("目录详情为",list)
     const height = getWindowHeight()
 
     if (!this.state.loaded) {
