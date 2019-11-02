@@ -6,7 +6,7 @@ const counterStore = observable({
   menu:[],
   userinfost:{},
   openid:"",
-  loginstatest:false,
+  loginstatest:'',
   localtost(localinfo){
     this.userinfost=localinfo
     if (localinfo){

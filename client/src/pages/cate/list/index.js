@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text, Image,Icon } from '@tarojs/components'
 import classNames from 'classnames'
 import './index.scss'
+import addicon from '../../../images/icon/icon37.png';
 
 export default class List extends Component {
   static defaultProps = {
@@ -18,9 +19,30 @@ export default class List extends Component {
     const { list } = this.props
     return (
       <View className='cate-list'>
-         <View className='cate-list__group'>
-            <View className='cate-list__wrap'>
+            <View >
              {list.map((item,index) => (
+            <View key={item.dtname} className='item'>
+              <View className='item-img'>
+                <Image className='item-img' src={item.dtpic}/>
+              </View>
+              <View className='item-info'>
+                <View className='item-info-title'>{item.dtname}</View>
+                <View className='item-info-desc'>....</View>
+              </View>
+              <Image className='item-btn' mode="widthFix" src={addicon}/>
+          </View>
+
+        ))}
+         </View>
+          </View>
+    )
+  }
+}
+
+
+
+      /*
+
                 <View
                   key={item.dtname}
                   className={classNames('cate-list__item',
@@ -32,12 +54,4 @@ export default class List extends Component {
                   <View className='cate-list__item-txt-wrap'>
                     <Text className='cate-list__item-txt'>{item.dtname}</Text>
                   </View>
-                </View>
-
-        ))}
-         </View>
-          </View>
-      </View>
-    )
-  }
-}
+                </View>*/

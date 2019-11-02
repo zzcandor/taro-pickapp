@@ -29,7 +29,6 @@ $item-size: 144px;
 .cate-list__wrap {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .cate-list__item {
@@ -62,5 +61,46 @@ $item-size: 144px;
     font-size: 24px;
     line-height: 36px;
     text-align: center;
+  }
+}
+
+
+.item {
+  display: flex;
+  justify-content:space-between;
+  padding: 20px;
+  background: #fff;
+  flex-direction: row;
+  &-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+  }
+  &-info {
+    flex: 1;
+    margin: 0 20px;
+    &-title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    &-desc {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+  }
+  &-btn {
+    height: 40px;
+    width:40px;
+    margin-top: 20px;
+    background: #ab2b2b;
+    color: #FFFFFF;
+
+
+
+  }
+}
+.column-skeleton {
+  .skeleton {
+    padding: 10px;
   }
 }

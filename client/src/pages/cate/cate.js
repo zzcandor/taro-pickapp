@@ -7,6 +7,8 @@ import List from './list'
 import Banner from './banner'
 import './cate.scss'
 import {inject, observer} from "@tarojs/mobx";
+import Skeleton from 'taro-skeleton'
+
 
 @inject('counterStore')  //将方法注入到组件的porps中，通过this.props访问
 @observer
