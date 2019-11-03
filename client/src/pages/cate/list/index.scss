@@ -68,35 +68,50 @@ $item-size: 144px;
 .item {
   display: flex;
   justify-content:space-between;
-  padding: 20px;
+  margin: 50px 0px 50px 0px;;
   background: #fff;
   flex-direction: row;
   &-img {
-    width: 90px;
-    height: 90px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
   }
   &-info {
     flex: 1;
-    margin: 0 20px;
+    margin-left: 30px;
     &-title {
       font-size: 30px;
-      font-weight: bold;
+      font-weight: bolder;
+      color: $text-color-light;
     }
     &-desc {
       margin-top: 10px;
       font-size: 24px;
+      font-weight:normal;
+      color: $text-color-light;
+    }
+    &-price{
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight:normal;
+      color: red;
     }
   }
+
+  &-footer {
+    display: flex;
+    justify-content:space-between;
+    font-weight:normal;
+    margin:30px 0px 0px 0px ;
+    background: #fff;
+    flex-direction: row;
+  }
+
   &-btn {
     height: 40px;
     width:40px;
-    margin-top: 20px;
     background: #ab2b2b;
     color: #FFFFFF;
-
-
-
   }
 }
 .column-skeleton {

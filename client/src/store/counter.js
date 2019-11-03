@@ -22,11 +22,11 @@ const counterStore = observable({
     this.openid=id
   },
   getcate(){
-    return axios.get('https://raw.githubusercontent.com/blackjack0v0/source/master/qingqucate.json')
+    return axios.get('https://gitee.com/blackjack0v0/ShuJuKu/raw/master/allgoods.json')
     //使用return返回promise方便在componentDidMount中调用
       .then(res => {
            this.category=res.data;
-           const newmenu=res.data.map(item=>item.title)
+           const newmenu=res.data.map(item=>item.catename)
            this.menu=newmenu
            console.log(newmenu)
         //使用map函数来对集合中的对象{}操作时可以采用解构写法！
@@ -45,9 +45,11 @@ const cartstore = observable({
   currentorderid:'',
   currentorder:{},
   allcheckstate: false,
-  totalcount: 2,
-  totalprice: 37,
+  totalcount: 0,
+  totalprice: 0,
   checkedlist: [],
+  cart:[],
+  cartid:[],
   defaultcart: [
     {
       id: '6666+',
@@ -71,10 +73,38 @@ const cartstore = observable({
     },
   ],  //测试购物车的内容，显示购物车结构
 
+  addtocart(goodsinfo){
+    const newcartlist=[]
+    const newcartid=[]
+    if (this.cartid.indexOf(goodsinfo.title)>-1){
+      console.log("已存在该商品")
+    }
+    else{
+      newcartid.push(goodsinfo.title)
+      this.cartid=[this.cartid,...newcartid];
+      newcartlist.push(goodsinfo)
+    }
+    //不在购物车内才加入
+    this.cart.map((item) => {
+      if (goodsinfo.id === item.id) {
+        const newitem = {...item, cnt: item.cnt+1}  //判断是否购物车内已有，已有则+1
+        newcartlist.push(newitem)
+        console.log('更新购物车内商品状态为', newitem)
+      }
+      else {
+        newcartlist.push(item)
+        //console.log("添加的其他商品为",item)//把没改动的原来购物车的内容加进去
+      }
+    });
+    this.cart=newcartlist
+    //console.log("最新cart内容为",this.cart)
+    this.totalcount=this.totalcount+1
+  },
+
   updatecount(sid, scnt) {
     console.log("触发mobx更新函数")
     const newcartlist = [];
-    this.defaultcart.map((item) => {
+    this.cart.map((item) => {
       if (sid === item.id) {
         const newitem = {...item, cnt: scnt}  //新变量注意使用const以免出现undefined
         newcartlist.push(newitem)
@@ -84,14 +114,14 @@ const cartstore = observable({
         newcartlist.push(item)
       }
     })
-    this.defaultcart = newcartlist
+    this.cart = newcartlist
     this.sumcount()
     this.sumprice()
   },
 
   updatecheck(sid, checkstate) {
     const newcartlist = [];
-    this.defaultcart.map((item) => {
+    this.cart.map((item) => {
       if (sid === item.id) {
         const newitem = {...item, checked: !checkstate}
         newcartlist.push(newitem)
@@ -101,19 +131,19 @@ const cartstore = observable({
         newcartlist.push(item)
       }
     })
-    this.defaultcart = newcartlist
+    this.cart = newcartlist
     this.sumcount()
     this.sumprice()
   },
 
   checkall(allcheckstate) {
     const newcartlist = [];
-    this.defaultcart.map((item) => {
+    this.cart.map((item) => {
       const newitem = {...item, checked: !allcheckstate}
       newcartlist.push(newitem)
       console.log('更新购物车内商品状态为', newitem)
     })
-    this.defaultcart = newcartlist
+    this.cart = newcartlist
     this.sumcount()
     this.sumprice()
     this.allcheckstate = !allcheckstate
@@ -121,7 +151,7 @@ const cartstore = observable({
 
   sumcount() {
     let totalcount = 0
-    this.defaultcart.forEach((item) => {
+    this.cart.forEach((item) => {
       if (item.checked === true) {
         totalcount = totalcount + item.cnt
       }
@@ -130,7 +160,7 @@ const cartstore = observable({
   },
   sumprice() {
     let totalprice = 0
-    this.defaultcart.forEach((item) => {
+    this.cart.forEach((item) => {
       if (item.checked === true) {
         totalprice = totalprice + item.actualPrice * item.cnt
       }
@@ -139,7 +169,7 @@ const cartstore = observable({
   },
   gencheckedlist() {
     const newcartlist = [];
-    this.defaultcart.map((item) => {
+    this.cart.map((item) => {
       if (item.checked === true) {
         newcartlist.push(item)
         console.log('已经勾选的商品为', item)

@@ -62,13 +62,12 @@ export default class List extends Component {
 
               <View className='cart-list__item-spec'>
                 <Text className='cart-list__item-spec-txt'>
-                  {item.specList.map(sepc => sepc.specValue).join(' ')}
                 </Text>
               </View>
 
               <View className='cart-list__item-wrap'>
                 <Text className='cart-list__item-price'>
-                  ¥{item.actualPrice}
+                  {item.actualPrice}
                 </Text>
                 <View className='cart-list__item-num'>
                   <InputNumber

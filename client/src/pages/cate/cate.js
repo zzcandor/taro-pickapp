@@ -53,7 +53,7 @@ class Cate extends Component {
     const currentCategory = category.find((item,index) => index === current) || {}
     console.log("当前目录为",currentCategory,current)
     const banner = currentCategory.focusBannerList || []
-    const list = currentCategory.detail || []
+    const list = currentCategory.categoods || []
     console.log("目录详情为",list)
     const height = getWindowHeight()
 

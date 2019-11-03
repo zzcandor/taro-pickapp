@@ -30,9 +30,9 @@ class App extends Component {
     navigateToMiniProgramAppIdList: [
     "wxd9634afb01b983c0"],
     pages: [
+      'pages/cate/cate',
       'pages/cart/cart',
       'pages/index',
-      'pages/cate/cate',
       'pages/user/user',
       'pages/order/index'
 

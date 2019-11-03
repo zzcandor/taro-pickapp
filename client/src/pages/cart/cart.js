@@ -43,12 +43,12 @@ class Index extends Component {
   }
 
   render () {
-    const {cartstore:{defaultcart,cartinfo}} = this.props//在这里导入数据
+    const {cartstore:{cart,cartinfo}} = this.props//在这里导入数据
     //console.log(updatecount,updatecheck)
     //console.log("cartstore状态",cartstore)
     //const cartinfo = cartstore.cartinfo
-    console.log("最新列表状态为",defaultcart)
-    const isEmpty = !defaultcart.length
+    console.log("最新列表状态为",cart)
+    const isEmpty = !cart.length
     const isShowFooter = !isEmpty
 
     if (!this.state.loaded) {
@@ -67,7 +67,7 @@ class Index extends Component {
           {isEmpty && <Empty />}
           {!isEmpty &&
             <List
-              list={defaultcart}
+              list={cart}
             />
           }
           {isShowFooter &&
