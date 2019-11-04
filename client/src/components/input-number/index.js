@@ -13,6 +13,8 @@ import {inject, observer} from "@tarojs/mobx";
 @observer
 export default class InputNumber extends Component {
   static defaultProps = {
+    show:false,
+    currentcart:[],
     item:{},
     itemid:'',
     compStyle: '',
@@ -72,6 +74,15 @@ export default class InputNumber extends Component {
     }
   }
 
+  judgeexits=(item)=>{
+    if (item){
+      return true
+    }
+    else{
+      return false
+    }                    //不这么写直接写existsitem出现错误  /*TODO 寻找原因
+  }
+
 
   render () {
     const { item,itemid,compStyle, numStyle,show } = this.props
@@ -82,7 +93,7 @@ export default class InputNumber extends Component {
     if(existsitem){console.log("存在的商品数量",existsitem.cnt)}
     return (
       <View className='comp-input-number' style={compStyle}>
-        { !!existsitem ? <View className='comp-input-number'>
+        { this.judgeexits(existsitem)  ? <View className='comp-input-number'>
         <View  className='comp-input-number__minus' onClick={()=>this.handleMinus(existsitem,itemid,show)}>
            <AtIcon value='subtract-circle' size='22' />
           </View>

@@ -113,6 +113,12 @@ $item-size: 144px;
     background: #ab2b2b;
     color: #FFFFFF;
   }
+    &-cnt {
+    font-weight:normal;
+    font-size: 32px;
+    color: $text-color-light;
+    margin:0px 10px 0px 10px ;
+  }
 }
 .column-skeleton {
   .skeleton {

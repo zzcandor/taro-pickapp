@@ -38,6 +38,11 @@ class Index extends Component {
       }
     })*/
   }
+
+  componentDidMount(){
+
+  }
+
   checkall=()=>{
     this.props.cartstore.checkall(this.props.cartstore.allcheckstate)
   }

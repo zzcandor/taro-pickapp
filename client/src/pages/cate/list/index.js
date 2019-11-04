@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import './index.scss'
 import addicon from '../../../images/icon/icon37.png';
 import {inject, observer} from "@tarojs/mobx";
-
+import {  InputNumber } from '@components'
 
 @inject( 'cartstore','counterStore')  //将方法注入到组件的porps中，通过this.props访问
 @observer
@@ -13,23 +13,35 @@ export default class List extends Component {
   static defaultProps = {
     list: []
   }
+  state={
+    count:0
+  }
 
-  updatecart=(item)=>{
-    const reformitem={
-      id:item.title,
-      itemName: item.title.substring(0,10),
-      pic: item.img, //https://s1.st.meishij.net/r/24/193/12798274/s12798274_152739747270250.jpg
-      checked: true,
-      actualPrice: item.price,
-      cnt: 1
+  judgeshow=(item)=>{
+    if (this.props.cartstore.cartid.indexOf(item.title)>-1){
+      return true
     }
-    this.props.cartstore.addtocart(reformitem)
-    console.log("加入的商品信息为",reformitem)
+    else{
+      return false
+    }
+
+  }
+
+
+  handleUpdate = (itemid, cnt) => {
+    console.log("更新数量为",cnt)
+     this.props.cartstore.updatecount(itemid,cnt)
+    Taro.setStorage({key:'cart',data:this.props.cartstore.cart}).then(rst => {  //将用户信息存入缓存中
+           console.log("存到本地数据为",rst.data)  })  //每次更改数量时都会储存一份订单到本地
+    console.log("更新数量为",cnt)
+
   }
 
 
   render () {
-    const { list } = this.props
+    const { list} = this.props
+    const {count}=this.state
+    const cart=this.props.cartstore.cart
     return (
       <View className='cate-list'>
             <View >
@@ -43,14 +55,17 @@ export default class List extends Component {
                 <View className='item-info-title'>{item.title.substring(0,10)}</View>
                 <View className='item-info-desc'>{item.title}</View>
                 <View  className='item-footer'>
-                      <View className='item-info-price'>{item.price}</View>
-                  <View color='#FFAF38'  onClick={()=>{this.updatecart(item)}}>
-                      <AtIcon value='add-circle' size='22' />
+                  <View className='item-info-price'>{item.price}</View>
+                 <InputNumber
+                   show={this.judgeshow(item)}
+                    item={item}
+                    itemid={item.title}
+                    onChange={this.handleUpdate}
+                  />
                   </View>
                 </View>
               </View>
-
-          </View>:<View/>
+      :<View/>
 
         ))}
          </View>
