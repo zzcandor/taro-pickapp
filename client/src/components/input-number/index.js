@@ -13,21 +13,13 @@ import {inject, observer} from "@tarojs/mobx";
 @observer
 export default class InputNumber extends Component {
   static defaultProps = {
-    show:false,
     currentcart:[],
     item:{},
     itemid:'',
-    compStyle: '',
-    optStyle: '',
-    numStyle: '',
     onChange: () => {}
   }
 
   componentDidMount(){
-    this.setState({
-      showchange:this.props.show,
-     //查找购物车内是否有商品
-    })
   }
 
   updatecart=(item)=>{
@@ -44,9 +36,8 @@ export default class InputNumber extends Component {
   }
 
 
-  handleMinus = (exists,itemid,show)=> {
+  handleMinus = (exists,itemid)=> {
     let  judgenum=1
-    if(show) {judgenum=1}
     if (exists!==undefined){
     const newnum=exists.cnt- 1
       if (newnum<judgenum){
@@ -64,7 +55,6 @@ export default class InputNumber extends Component {
   }
 
   handlePlus = (exists,item) => {
-    this.setState({showchange:true})
     if (exists!==undefined){
     const newnum=exists.cnt+ 1
     this.props.onChange(this.props.itemid,newnum)
@@ -85,16 +75,15 @@ export default class InputNumber extends Component {
 
 
   render () {
-    const { item,itemid,compStyle, numStyle,show } = this.props
-    const {cartstore:{cart,cartinfo}} = this.props
-    const {showchange}=this.state
+    const { item,itemid} = this.props
+    const {cartstore:{cart}} = this.props
     const existsitem=cart.find(function(x) {return x.id === itemid;})
     console.log("是否存在该商品",existsitem)
     if(existsitem){console.log("存在的商品数量",existsitem.cnt)}
     return (
-      <View className='comp-input-number' style={compStyle}>
+      <View className='comp-input-number' >
         { this.judgeexits(existsitem)  ? <View className='comp-input-number'>
-        <View  className='comp-input-number__minus' onClick={()=>this.handleMinus(existsitem,itemid,show)}>
+        <View  className='comp-input-number__minus' onClick={()=>this.handleMinus(existsitem,itemid)}>
            <AtIcon value='subtract-circle' size='22' />
           </View>
           <View

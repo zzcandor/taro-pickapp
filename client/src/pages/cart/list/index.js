@@ -33,13 +33,6 @@ export default class List extends Component {
     this.props.cartstore.updatecheck(sid,checkstate)
   }
 
-  judgeshow=(item)=>{
-    if (item.cnt===0)
-    {
-      return false
-    }
-    else{ return true}   //判断是否显示数字
-  }
   //在组件中匿名函数来传递整个函数，方便整个传递给子组件
 
   render () {
@@ -81,7 +74,6 @@ export default class List extends Component {
                 </Text>
                 <View className='cart-list__item-num'>
                   <InputNumber
-                    show={this.judgeshow(item)}
                     item={item}
                     itemid={item.id}
                     onChange={this.handleUpdate}

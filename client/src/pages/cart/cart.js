@@ -19,7 +19,7 @@ class Index extends Component {
   }
 
   state = {
-    loaded: true,
+    loaded: false,
     login: true
   }
 
@@ -40,7 +40,11 @@ class Index extends Component {
   }
 
   componentDidMount(){
-
+          Taro.getStorage({key:'cart'}).then(rst => {  //将用户信息存入缓存中
+                    this.props.cartstore.syncart(rst.data)
+                    this.setState({loaded:true})
+                    console.log("本地数据为",rst.data)
+                    }).catch(err=>{console.log(err)})
   }
 
   checkall=()=>{
@@ -63,13 +67,13 @@ class Index extends Component {
 
 
     return (
+      isEmpty? <Empty />:
       <View className='cart'>
         <ScrollView
           scrollY
           className='cart__wrap'
           style={{ height: getWindowHeight() }}
         >
-          {isEmpty && <Empty />}
           {!isEmpty &&
             <List
               list={cart}

@@ -4,6 +4,7 @@ import { Loading } from '@components'
 import { getWindowHeight } from '@utils/style'
 import Menu from './menu'
 import List from './list'
+import { AtFab } from 'taro-ui'
 import Banner from './banner'
 import './cate.scss'
 import {inject, observer} from "@tarojs/mobx";

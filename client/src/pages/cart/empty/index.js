@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import empty from './assets/empty.png'
 import './index.scss'
-import { AtIcon } from 'taro-ui'
+import { AtIcon,AtButton } from 'taro-ui'
 
 import {inject, observer} from "@tarojs/mobx";
 
@@ -11,12 +11,10 @@ import {inject, observer} from "@tarojs/mobx";
 @observer
 export default class Empty extends Component {
 
-  synccart(){  //获取本地储存的订单
-    Taro.getStorage({key:'cart'}).then(rst => {  //将用户信息存入缓存中
-                    this.props.cartstore.syncart(rst.data)
-                    console.log("本地数据为",rst.data)
-                    }).catch(err=>{console.log(err)})
-
+  switchtab(){
+    Taro.switchTab({
+      url: "../cate/cate",
+})
   }
 
   render () {
@@ -30,9 +28,8 @@ export default class Empty extends Component {
           {this.props.text || '快去享受乐趣吧'}
         </Text>
         <View className='cart-sync'>
-          <Text className='cart-empty__txt'>点此同步购物车</Text>
-          <View  onClick={this.synccart}>
-            <AtIcon value='download-cloud' size='40' />
+          <View   className='cart-empty__icon' onClick={this.switchtab}>
+           <AtButton  color="red" type='primary' size='small' circle={true}>去购物</AtButton>
           </View>
         </View>
       </View>

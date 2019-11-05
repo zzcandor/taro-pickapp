@@ -17,15 +17,6 @@ export default class List extends Component {
     count:0
   }
 
-  judgeshow=(item)=>{
-    if (this.props.cartstore.cartid.indexOf(item.title)>-1){
-      return true
-    }
-    else{
-      return false
-    }
-
-  }
 
 
   handleUpdate = (itemid, cnt) => {
@@ -57,7 +48,6 @@ export default class List extends Component {
                 <View  className='item-footer'>
                   <View className='item-info-price'>{item.price}</View>
                  <InputNumber
-                   show={this.judgeshow(item)}
                     item={item}
                     itemid={item.title}
                     onChange={this.handleUpdate}

@@ -10,8 +10,8 @@
 }
 
 .cart-empty__img {
-  width: 260px;
-  height: 260px;
+  width: 300px;
+  height: 300px;
 }
 
 .cart-sync {
@@ -22,4 +22,13 @@
   color: $text-color-lighter;
   font-size: 28px;
   line-height: 28px;
+}
+
+.cart-empty__icon {
+  display: flex;
+  margin-top: 20px;
+  color: $text-color-lighter;
+  align-items: center;
+  justify-content: center;
+
 }
