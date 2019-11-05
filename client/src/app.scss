@@ -1,4 +1,16 @@
 @import '@styles/reset.scss';
+/* Custom Theme */
+$color-brand: #e93b3d;
+$color-brand-light: #ef6c6e;
+$color-brand-dark: #ba2f31;
+
+
+
 @import "~taro-ui/dist/style/index.scss";
+
+@import '~taro-icons/scss/MaterialCommunityIcons.scss'; // 495KB
+@import '~taro-icons/scss/MaterialIcons.scss' ;// 112KB
+//@import '~taro-icons/scss/Ionicons.scss'; // 134KB
+//@import '~taro-icons/scss/FontAwesome.scss'; // 322KB
 
 /* Custom Theme */

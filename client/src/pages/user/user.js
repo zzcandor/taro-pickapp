@@ -13,7 +13,13 @@ import coupon_img from '../../images/user/coupon.png';
 import about_img from '../../images/user/about.png';
 import address_img from '../../images/user/address.png';
 import all_img from '../../images/user/all.png';
-
+import { AtFab } from 'taro-ui'
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Ionicons,
+  FontAwesome,
+} from 'taro-icons';
 
 @inject( 'counterStore')  //将方法注入到组件的porps中，通过this.props访问
 @observer
@@ -59,7 +65,6 @@ class User extends Component {
          userinfo:rst.data
        })}).catch(err=>{console.log(err)})
   }
-
 
 
 
@@ -153,6 +158,12 @@ class User extends Component {
               <View className="iconfont icon-more arrow" />
             </View>
           </View>
+          <Button open-type="contact" className="kefu" >
+            <Text>客服</Text>
+          </Button>
+
+
+
            <View className='logout-model'>
             <AtModal
                 isOpened={isOpened}
@@ -173,3 +184,8 @@ class User extends Component {
 }
 
 export default User
+
+/*
+          <Form onSubmit={this.submit} report-submit="true">
+            <Button formType="submit">发送模板消息</Button>
+         </Form> */  //发送模板消息

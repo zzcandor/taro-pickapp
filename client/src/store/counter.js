@@ -75,6 +75,8 @@ const cartstore = observable({
 
   syncart(cart){
     this.cart=cart
+    this.sumcount()
+    this.sumprice()
   },
 
   addtocart(goodsinfo){

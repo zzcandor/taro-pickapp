@@ -44,7 +44,7 @@ class Index extends Component {
                     this.props.cartstore.syncart(rst.data)
                     this.setState({loaded:true})
                     console.log("本地数据为",rst.data)
-                    }).catch(err=>{console.log(err)})
+                    }).catch(err=>{console.log(err);this.setState({loaded:true})})
   }
 
   checkall=()=>{

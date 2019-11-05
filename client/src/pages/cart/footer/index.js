@@ -15,6 +15,9 @@ export default class Footer extends Component {
     cartInfo: {},
     onToggle: () => {}
   }
+  state ={
+    disabled:false
+  }
 
   handleUpdateCheck = () => {
     this.props.onUpdateCheck()
@@ -33,7 +36,8 @@ export default class Footer extends Component {
             this.props.cartstore.updatecurrentorder(res.result.data.data)
             console.log('调用函数后取得的数据',res.result.data.data)
                   const combineurl='/pages/order/index'
-                  Taro.navigateTo({url:combineurl })})
+                  Taro.navigateTo({url:combineurl })
+                  this.setState({disabled:false})  })
         .catch(err => {
             console.log(err)
       })
@@ -41,6 +45,7 @@ export default class Footer extends Component {
 
 
   handleOrder = () => {
+    this.setState({disabled:true})
     const orderdetail=this.props.cartstore.gencheckedlist()
     this.createorder(orderdetail)
     let out_trade_no=wxPayUtil.getOrderNo("WA");
@@ -63,8 +68,11 @@ export default class Footer extends Component {
     //上面是调用支付的。
   }
 
+
+
   render () {
     const { totalcount,totalprice } = this.props.cartstore
+    const {disabled} =this.state
     return (
       <View className='cart-footer'>
         <View className='cart-footer__select'>
@@ -84,10 +92,13 @@ export default class Footer extends Component {
         </View>
         <View className='cart-footer__btn'>
           <ButtonItem
+            disabled={disabled}
             type='primary'
             text='下单'
             onClick={this.handleOrder}
           />
+
+
         </View>
       </View>
     )

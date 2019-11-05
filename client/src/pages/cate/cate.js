@@ -15,7 +15,7 @@ import Skeleton from 'taro-skeleton'
 @observer
 class Cate extends Component {
   config = {
-    navigationBarTitleText: '分类'
+    navigationBarTitleText: '首页'
   }
 
   state = {

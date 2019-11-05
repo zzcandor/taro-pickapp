@@ -30,6 +30,10 @@
   height: 20px;
 }
 
+.kefu{
+  align-items: center;
+}
+
 .login {
   height: 15px;
 }
@@ -49,6 +53,12 @@
   .taro-img,
   image {
     height: 100%;
+  }
+  .contact{
+    position: fixed;
+    bottom:50px;/*距离浏览器顶部30px*/
+    right:40px;/*举例浏览器左部160px*/
+    color:gray;
   }
   .not-login {
     .to-login {
@@ -146,6 +156,7 @@
       }
     }
   }
+
   .login {
     .card {
       width: 660px;

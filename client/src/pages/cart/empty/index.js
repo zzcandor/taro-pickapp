@@ -29,7 +29,7 @@ export default class Empty extends Component {
         </Text>
         <View className='cart-sync'>
           <View   className='cart-empty__icon' onClick={this.switchtab}>
-           <AtButton  color="red" type='primary' size='small' circle={true}>去购物</AtButton>
+           <AtButton className='cart-button' type='primary' size='small' circle={true}>去购物</AtButton>
           </View>
         </View>
       </View>

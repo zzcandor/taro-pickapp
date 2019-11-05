@@ -34,7 +34,7 @@ class App extends Component {
       'pages/cart/cart',
       'pages/index',
       'pages/user/user',
-      'pages/order/index'
+      'pages/order/index',
 
     ],
     window: {
