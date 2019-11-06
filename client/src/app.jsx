@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 
-import {counterStore,cartstore} from './store/counter'
+import {counterStore,cartstore,addressstore} from './store/counter'
 
 
 import Index from './pages/index'
@@ -21,7 +21,9 @@ import './app.scss'
 //在app中引入store,可以引入多个store，使用时@inject( 'counterStore')指明store即可
 const store = {
   counterStore:counterStore,
-  cartstore:cartstore
+  cartstore:cartstore,
+  addressstore:addressstore,
+
 }
 
 class App extends Component {
@@ -35,6 +37,7 @@ class App extends Component {
       'pages/index',
       'pages/user/user',
       'pages/order/index',
+      'pages/addaddress/index'
 
     ],
     window: {
@@ -42,6 +45,12 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: '点单小程序',
       navigationBarTextStyle: 'black'
+    },
+    permission: {
+      // 在 app.json 里面增加 permission 属性配置
+      'scope.userLocation': {
+        desc: '请授权以便使用定位信息',
+      },
     },
      tabBar: {
       color: "#666",

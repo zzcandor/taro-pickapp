@@ -135,9 +135,9 @@ class User extends Component {
           </View>
 
           <View
-            className="item"
+            className="item"  onClick={()=>{Taro.navigateTo({url: '/pages/addaddress/index'})}}
           >
-            <View className="left">
+            <View className="left" >
               <Image className="icon-left" src={address_img} />
               <Text>收货地址</Text>
             </View>

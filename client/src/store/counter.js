@@ -232,6 +232,17 @@ const cartstore = observable({
 })
 
 
+const addressstore = observable({
+  address: '', //注意这里是集合不要{}字典！
+  showmap:false,
+  updateaddress(address) {
+    this.address=address
+  },
+  updateshow(e){
+  this.showmap=e
+  }
+})
 
 
-export {counterStore,cartstore}
+
+export {counterStore,cartstore,addressstore}
