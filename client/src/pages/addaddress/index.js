@@ -53,7 +53,7 @@ class Index extends Component {
         </View>
         <View className="phone">
           <span>手机号：</span>
-          <Input className="input"  placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx" auto-focus/>
+          <Input className="input"  placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx"/>
         </View>
         <View className="address"  onClick={()=>{this.props.addressstore.updateshow(true);this.setState({showmap:true})}}>
           <span >收货地址：</span>
@@ -65,7 +65,7 @@ class Index extends Component {
         </View>
         <View className="house-num">
           <span>门牌号：</span>
-          <Input className="input" placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" auto-focus/>
+          <Input className="input" placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" />
         </View>
         <View className="submit">
           <span>保存地址</span>

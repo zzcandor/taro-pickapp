@@ -30,56 +30,81 @@ export default class chooseaddress extends Component {
       qMapKey: 'S32BZ-TYNL4-JDVUZ-XMLOV-DIIHS-WBF4J',
       QQMapSDK: {},
       nearbyBuilding: [],
-      searchVal: '商场',
+      searchVal: '酒店',
     };
   }
 
-  componentDidMount = () => {
-    // 实例化API核心类
-    const QQMapSDK = new QQMapWX({
-      key: 'S32BZ-TYNL4-JDVUZ-XMLOV-DIIHS-WBF4J',
-      mapStyleId: 'style1', // 个性化地图
-    });
-    this.setState({
-      QQMapSDK,
-    });
-    const that = this;
-    Taro.getLocation({
-      type: 'wgs84',
-      success: function(res) {
-        // 获取周边建筑信息
-        QQMapSDK.search({
-          keyword: that.state.searchVal,
-          boundary: `nearBy(${res.latitude},${res.longitude},1000)`,
-          success: function(searchRes) {
-            that.setState({
-              nearbyBuilding: searchRes.data,
-            })
-            console.log(searchRes);
-          },
-          fail: function(searchRes) {
-            console.log(searchRes);
-          },
-          // complete: function(searchRes) {
-          //   console.log(searchRes);
-          // },
-        });
-        // 设置当前位置
-        const obj = {
-          // 标记点
-          ...that.state.markers[0],
-          latitude: res.latitude, // 纬度
-          longitude: res.longitude, // 经度
-        };
-        that.setState({
-          markers: [obj],
-          latitude: res.latitude, // 纬度
-          longitude: res.longitude, // 经度,
-        });
-      },
-    });
-  };
 
+  componentDidMount = () => {
+     if (!this.mapContext) {
+        this.mapContext = Taro.createMapContext('myMap', this.$scope)
+       // 实例化API核心类
+       const QQMapSDK = new QQMapWX({
+         key: 'S32BZ-TYNL4-JDVUZ-XMLOV-DIIHS-WBF4J',
+         mapStyleId: 'style1', // 个性化地图
+       });
+       this.setState({
+         QQMapSDK,
+       });
+       const that = this;
+       Taro.getLocation({
+         type: 'wgs84',
+         success: function (res) {
+           // 获取周边建筑信息
+           console.log("重新定位")
+           QQMapSDK.search({
+             keyword: that.state.searchVal,
+             location: `${res.latitude},${res.longitude}`,
+             success: function (searchRes) {
+               that.setState({
+                 nearbyBuilding: searchRes.data,
+               })
+               console.log(searchRes);
+             },
+             fail: function (searchRes) {
+               console.log(searchRes);
+             },
+             // complete: function(searchRes) {
+             //   console.log(searchRes);
+             // },
+           });
+           // 设置当前位置
+           const obj = {
+             // 标记点
+             ...that.state.markers[0],
+             latitude: res.latitude, // 纬度
+             longitude: res.longitude, // 经度
+           };
+           that.setState({
+             markers: [obj],
+             latitude: res.latitude, // 纬度
+             longitude: res.longitude, // 经度,
+           });
+         },
+       });
+     }};
+
+
+   searchfujin(latitude,longitude){
+     const that=this
+     console.log("最新位置",latitude,longitude)
+       this.state.QQMapSDK.search({
+             keyword: "酒店",
+             location: `${latitude},${longitude}`,
+             success: function (search2) {
+               that.setState({
+                 nearbyBuilding: search2.data,
+               })
+               console.log("搜索结果附近",search2.data);
+             },
+             fail: function (searchRes) {
+               console.log(searchRes);
+             },
+             // complete: function(searchRes) {
+             //   console.log(searchRes);
+             // },
+           });
+}
   /**
    * 搜索框
    * @param e
@@ -135,9 +160,34 @@ export default class chooseaddress extends Component {
   /**
    * 视野发生变化触发事件
    */
-  handleRegionChange = e => {
-    console.log(e);
-  };
+   //下面为移动选点函数
+
+   updateCenterLocation(res) {
+    let latitude = res.latitude;
+    let longitude = res.longitude;
+    // let markers = JSON.parse(JSON.stringify(this.state.markers));
+    // let marker = markers[0]
+    // marker.longitude = longitude;
+    // marker.latitude = latitude;
+    console.log('loc u')
+    console.log(res.latitude,res.longitude)
+    const obj = {
+       // 标记点
+       ...this.state.markers[0],
+       latitude: res.latitude, // 纬度
+       longitude: res.longitude, // 经度
+     };
+     this.setState({
+       markers: [obj],
+       latitude: res.latitude, // 纬度
+       longitude: res.longitude, // 经度,
+     });
+     this.searchfujin(res.latitude,res.longitude)
+  }
+
+
+
+
   render() {
     return (
       <View className="homeWrap">
@@ -159,6 +209,7 @@ export default class chooseaddress extends Component {
          * cover-view 覆盖在原生组件之上的文本视图
          */}
         <Map
+          id="myMap"
           class="mapDom"
           subkey={this.state.qMapKey}
           longitude={this.state.longitude}
@@ -166,8 +217,23 @@ export default class chooseaddress extends Component {
           scale="18"
           markers={this.state.markers}
           onMarkertap={this.handleMarkerClick.bind(this)}
-          onRegionchange={this.handleRegionChange.bind(this)}
           showLocation
+           onRegionchange={() => {
+          if (this.changingRegion) {
+            this.changingRegion = false;
+            this.mapContext && this.mapContext.getCenterLocation({
+              success: (res) => {
+                this.updateCenterLocation(res)
+              },
+              fail: e => {
+              },
+              complete: e => {
+              }
+            })
+          } else {
+            this.changingRegion = true;
+          }
+        }}
         >
           <CoverView className="coverImgWrap">
             {/*<CoverImage src={imgUrl} className="coverImg" />*/}
