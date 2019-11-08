@@ -1,0 +1,519 @@
+/** Created by guangqiang on 2018-06-29 18:07:09 */
+
+  // 美团外卖小程序主题色系
+
+  /** 主题色 **/
+  $theme-color: #F4F4F4;
+
+  // 默认浅灰色背景颜色
+  $page-bgcolor: #F4F4F4;
+
+  // 黑色背景颜色
+  $pageBlack-bgcolor: #2C2D30;
+
+  // 默认黑色字体颜色
+  $textBlack-color: #333;
+
+  // 默认深灰色字体颜色
+  $textDarkGray-color: #666;
+
+  // 默认灰色字体颜色
+  $textGray-color: #ccc;
+
+  // 美团红
+  $mtRed-color: #e74c3c;
+
+  // 默认浅灰色
+  $textLightGray-color: #ccc;
+
+  // 默认分割线颜色
+  $spLine-color: #e4e4e4;
+
+  // 默认虚分割线颜色
+  $dashedLine-color: #EAEAEA;
+
+  // 默认placeholder颜色
+  $placeholder-textcolor: #9B9B9B;
+
+  // borderColor
+  $border-color: #808080;
+
+  // 导航title 颜色
+  $nav-titlecolor: #262626;
+
+  // 导航背景颜色
+  $nav-bgcolor: #FEFEFE;
+
+  /** width **/
+  // 边框线宽度
+  $border-width: 2rpx;
+  // 分割线高度
+  $line-width: 2rpx;
+
+  /** height **/
+  // 底部按钮高度
+  $bottonBtn-height: 44;
+  // 通用列表cell高度
+  $cell-height: 44;
+
+  /** font **/
+  // 默认文字字体
+  $text-font: 14;
+  // 默认按钮文字字体
+  $btn-font: 15;
+  // 按钮小号文字字体
+  $btnFont-small: 13;
+  // 导航title字体
+  $navTitle-font: 17;
+  // tabBar文字字体
+  $tabbarTitle-font: 12;
+  // 占位符的默认字体大小
+  $placeholder-font: 13;
+
+  /** opacity **/
+  // mask 透明度
+  $modal-opacity: 0.3;
+
+
+.page{
+  display: flex;
+  background-color: #F9F9F9;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  .header-c {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    .tab-c {
+      display: flex;
+      height: 88px;
+      align-items: center;
+      .left {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex: 1;
+        font-size: 32px;
+        color: $textBlack-color;
+        height: 88px;
+      }
+      .right {
+        @extend .left;
+      }
+    }
+    .delivery {
+      display: flex;
+      background-color: white;
+      flex-direction: column;
+      .address-c {
+        display: flex;
+        background-color: white;
+        padding: 20px 0;
+        i {
+          font-size: 36px;
+          margin: 20px;
+          color: #434343;
+        }
+        .address {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          margin: 0 20px;
+          flex: 1;
+          .address-info {
+            font-size: 32px;
+            color: $textBlack-color;
+          }
+          .user-info {
+            font-size: 24px;
+            color: $textDarkGray-color;
+          }
+        }
+      }
+      .line-sp {
+        height: 2px;
+        background-color: $spLine-color;
+        flex: 1;
+        margin: 0 20px;
+      }
+      .delivery-time {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 0 20px;
+        i {
+          font-size: 28px;
+          color: $textBlack-color;
+        }
+        .content {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          margin: 20px;
+          .c-l {
+            font-size: 32px;
+            color: $textBlack-color;
+          }
+          .c-r {
+            font-size: 24px;
+            color: #5584E2;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+    .pick {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      padding: 30px;
+      .title {
+        font-size: 28px;
+        color: $textBlack-color;
+      }
+      .address {
+        font-size: 36px;
+        color: $textBlack-color;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .map {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        .distance {
+          font-size: 28px;
+          color: #000;
+        }
+        .line {
+          width: 2px;
+          height: 20px;
+          background-color: $textGray-color;
+          margin: 0 16px;
+        }
+        .btn {
+          font-size: 28px;
+          color: #2F84E9;
+        }
+      }
+      .time {
+        display: flex;
+        align-items: center;
+        border-top: 2px solid $spLine-color;
+        border-bottom: 2px solid $spLine-color;
+        margin: 30px 0;
+        height: 140px;
+        .l {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          .l-t {
+            font-size: 24px;
+            color: $textDarkGray-color;
+          }
+          .l-b {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+            span {
+              font-size: 24px;
+              color: #000;
+            }
+            i {
+              font-size: 28px;
+              color: $textGray-color;
+              margin-left: 10px;
+            }
+          }
+        }
+        .line {
+          width: 2px;
+          height: 100px;
+          background-color: $spLine-color;
+        }
+        .r {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          margin-left: 30px;
+          .r-t {
+            font-size: 24px;
+            color: $textDarkGray-color;
+          }
+          .r-b {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+            span {
+              font-size: 24px;
+              color: #000;
+            }
+            i {
+              font-size: 28px;
+              color: $textGray-color;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+      .protocol {
+        display: flex;
+        align-items: center;
+        i {
+          font-size: 36px;
+          color: $theme-color;
+        }
+        span {
+          font-size: 28px;
+          color: $textBlack-color;
+          margin-left: 30px;
+        }
+        text {
+          font-size: 28px;
+          color: #626381;
+        }
+      }
+    }
+  }
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    background-color: white;
+    .line-sp {
+        height: 2px;
+        background-color: $spLine-color;
+        flex: 1;
+        margin: 0 20px;
+      }
+    .section {
+      display: flex;
+      align-items: center;
+      align-items: center;
+      height: 88px;
+      padding: 0 20px;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+      }
+      span {
+        font-size: 28px;
+        color: $textDarkGray-color;
+        flex: 1;
+        margin-left: 20px;
+      }
+      text {
+        color: $textBlack-color;
+        font-size: 20px;
+        padding: 3px 6px;
+        border: 2px solid $textBlack-color;
+      }
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      .item {
+        display: flex;
+        height: 120px;
+        flex: 1;
+        margin: 20px 0 10px 0 ;
+        Image {
+          width: 100px;
+          height: 100px;
+          margin-left: 10px;
+        }
+        .item-r {
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          margin: 0 20px;
+          .r-t {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+              font-size: 28px;
+              color: $textBlack-color;
+            }
+          }
+          span {
+            font-size: 20px;
+              color: $textDarkGray-color;
+          }
+        }
+      }
+    }
+
+  }
+
+  .totle-price {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin: 20px;
+        .l {
+          font-size: 24px;
+          color: $textDarkGray-color;
+        }
+        .m {
+          font-size: 28px;
+          color: $textBlack-color;
+          margin: 0 20px;
+        }
+        .r {
+          font-size: 28px;
+          color: $mtRed-color;
+        }
+      }
+  .privacy-c {
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+    background-color: white;
+    margin: 20px;
+    justify-content: center;
+    .top {
+      display: flex;
+      align-items: center;
+      margin: 0 20px;
+      .t-l {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        span {
+          font-size: 28px;
+          color: $textBlack-color;
+          margin: 0 10px;
+        }
+      }
+    }
+    span {
+      font-size: 20px;
+      color: $textDarkGray-color;
+      margin: 0 20px;
+    }
+  }
+  .bottom-c {
+    display: flex;
+    background-color: white;
+    margin: 20px;
+    margin-top: 0;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 186px;
+    .line-sp {
+        height: 2px;
+        background-color: $spLine-color;
+        flex: 1;
+        margin: 0 20px;
+      }
+    .b-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+      margin: 0 20px;
+
+      span {
+        font-size: 28px;
+        color: $textBlack-color;
+      }
+    }
+    .b-mid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+      margin: 0 0px;
+      .mid-l {
+        font-size: 28px;
+        color: $textBlack-color;
+      }
+      .mid-r {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 28px;
+          color: $textDarkGray-color;
+        }
+        i {
+          font-size: 28px;
+          color: $textGray-color;
+          margin-left: 10px;
+        }
+      }
+    }
+    .b-btm {
+      display: flex;
+      background-color: white;
+      margin: 20px;
+      align-items: center;
+      .b-l {
+        font-size: 28px;
+        color: $textBlack-color;
+        flex: 1;
+      }
+      .b-r {
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+        margin-right: 0;
+        .s-l {
+          font-size: 24px;
+          color: #00CB91;
+          margin: 0 10px;
+        }
+        .picker {
+          div {
+            display: flex;
+            align-items: center;
+            .s-r {
+              font-size: 28px;
+              color: $textDarkGray-color;
+              margin-right: 10px;
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+  .pay-btn {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100px;
+    background-color: #4EAA31;
+    justify-content: center;
+    .top {
+      display: flex;
+      height: 50px;
+      align-items: center;
+      margin-top: 30px;
+      .s-l {
+        font-size: 32px;
+        color: white;
+      }
+      .s-m {
+        font-size: 36px;
+        color: white;
+        font-weight: bold;
+        margin: 0 20px;
+      }
+      .s-r {
+        font-size: 24px;
+        color: white;
+      }
+    }
+  }
+}

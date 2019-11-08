@@ -31,6 +31,8 @@ class Index extends Component {
     this.setState({showmap:this.props.addressstore.showmap,
                   address:this.props.addressstore.address})
   }
+  componentDidShow(){
+  }
 
   componentWillUnmount(){  //清除当前状态
     console.log("页面返回，清空当前状态")
@@ -49,7 +51,7 @@ class Index extends Component {
       <View className="container">
         <View className="name">
           <span>联系人：</span>
-          <Input className="input"  placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx" auto-focus/>
+          <Input className="input"  placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx"/>
         </View>
         <View className="phone">
           <span>手机号：</span>

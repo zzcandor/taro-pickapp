@@ -23,8 +23,8 @@ export default class chooseaddress extends Component {
           id: 0, // 标记点 id marker 点击事件回调会返回此 id。建议为每个 marker 设置上 number 类型 id，保证更新 marker 时有更好的性能。
           latitude: 35.970538, // 纬度
           longitude: 120.259514, // 经度
-          width: 16, // 标注图标高度
-          height: 16, // 标注图标宽度
+          width: 22, // 标注图标高度
+          height: 22, // 标注图标宽度
         },
       ],
       qMapKey: 'S32BZ-TYNL4-JDVUZ-XMLOV-DIIHS-WBF4J',
@@ -48,7 +48,7 @@ export default class chooseaddress extends Component {
        });
        const that = this;
        Taro.getLocation({
-         type: 'wgs84',
+         type: 'gcj02',  //使手机gps定位位置符合！
          success: function (res) {
            // 获取周边建筑信息
            console.log("重新定位")
@@ -218,9 +218,10 @@ export default class chooseaddress extends Component {
           markers={this.state.markers}
           onMarkertap={this.handleMarkerClick.bind(this)}
           showLocation
-           onRegionchange={() => {
+           onRegionchange={(e) => {
           if (this.changingRegion) {
             this.changingRegion = false;
+        if (e.type === 'end' && (e.causedBy === 'scale' || e.causedBy === 'drag')){
             this.mapContext && this.mapContext.getCenterLocation({
               success: (res) => {
                 this.updateCenterLocation(res)
@@ -229,7 +230,7 @@ export default class chooseaddress extends Component {
               },
               complete: e => {
               }
-            })
+            })}
           } else {
             this.changingRegion = true;
           }
