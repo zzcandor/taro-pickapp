@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text,Input } from '@tarojs/components'
+import { View, Text,Input,Form } from '@tarojs/components'
 import { AtTextarea } from 'taro-ui'
 
 import './index.scss'
@@ -39,7 +39,46 @@ class Index extends Component {
        this.setState({showmap:false,
                   address:''})
   }
+  submit=()=>{
+    const newad={
+      address:this.state.address,
+      name:this.state.name,
+      phone:this.state.phone,
+      checked:true,}
 
+    this.props.addressstore.updateaddressfull(newad)
+    this.props.addressstore.updatecheck(newad);
+    this.props.addressstore.updateaddresslist(newad)
+    Taro.navigateBack()
+
+  }
+
+    handlenameChange (e) {
+    this.setState({
+      name:e.detail.value
+    })
+      console.log(e.detail.value)
+    // 在小程序中，如果想改变 value 的值，需要 `return value` 从而改变输入框的当前值
+    return e.detail.value
+  }
+
+      handlephoneChange (e) {
+    this.setState({
+      phone:e.detail.value
+    })
+      console.log(e.detail.value)
+    // 在小程序中，如果想改变 value 的值，需要 `return value` 从而改变输入框的当前值
+    return e.detail.value
+  }
+
+      handledtChange (e) {
+    this.setState({
+      detail:e.detail.value
+    })
+      console.log(e.detail.value)
+    // 在小程序中，如果想改变 value 的值，需要 `return value` 从而改变输入框的当前值
+    return e.detail.value
+  }
 
 
 
@@ -51,11 +90,11 @@ class Index extends Component {
       <View className="container">
         <View className="name">
           <span>联系人：</span>
-          <Input className="input"  placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx"/>
+          <Input className="input" value={this.state.name}  onChange={this.handlenameChange.bind(this)} placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx"/>
         </View>
         <View className="phone">
           <span>手机号：</span>
-          <Input className="input"  placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx"/>
+          <Input className="input" value={this.state.phone} onChange={this.handlephoneChange.bind(this)}   placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx"/>
         </View>
         <View className="address"  onClick={()=>{this.props.addressstore.updateshow(true);this.setState({showmap:true})}}>
           <span >收货地址：</span>
@@ -67,9 +106,9 @@ class Index extends Component {
         </View>
         <View className="house-num">
           <span>门牌号：</span>
-          <Input className="input" placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" />
+          <Input className="input"  value={this.state.detail} onChange={this.handledtChange.bind(this)}  placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" />
         </View>
-        <View className="submit">
+        <View className="submit"  onClick={this.submit}>
           <span>保存地址</span>
         </View>
       </View>:<chooseaddress/>

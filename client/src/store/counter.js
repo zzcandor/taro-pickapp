@@ -234,13 +234,39 @@ const cartstore = observable({
 
 const addressstore = observable({
   address: '', //注意这里是集合不要{}字典！
+  addressfull:{},
+  addresslist:[{address:"广东省深圳市宝安区龙光大厦",name:"吴先生",phone:"13112223250"},{address:"广东省汕头市广东省深圳市宝安区龙光大厦龙光大厦",name:"jack",phone:"1236568"},{address:"广东省汕头市",name:"jack",phone:"1236568"}],
+
   showmap:false,
   updateaddress(address) {
     this.address=address
   },
+  updateaddressfull(e){
+    this.addressfull=e
+  },
   updateshow(e){
   this.showmap=e
+  },
+  updateaddresslist(e){
+    this.addresslist.push(e)
+  },
+  updatecheck(sid){
+    const newcartlist = [];
+    this.addresslist.map((item) => {
+      if (sid === item) {
+        const newitem = {...item, checked: true}
+        newcartlist.push(newitem)
+        console.log('更新购物车内商品状态为', newitem)
+      }
+      else {
+        const newitem = {...item, checked: false}
+        newcartlist.push(newitem)
+        console.log('更新购物车内商品状态为', newitem)
+      }
+    })
+    this.addresslist = newcartlist
   }
+
 })
 
 

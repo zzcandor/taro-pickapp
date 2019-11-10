@@ -246,7 +246,7 @@ export default class chooseaddress extends Component {
             <View
               key={item.id}
               className="nearbyBuilding"
-              onClick={this.handleNearbyClick.bind(this, item.address,item.location.lat, item.location.lng)}
+              onClick={this.handleNearbyClick.bind(this, item.address+item.title,item.location.lat, item.location.lng)}
             >
               <View className="nearbyTitle">{item.title}</View>
               <View className="nearbyAddr">{item.address}</View>

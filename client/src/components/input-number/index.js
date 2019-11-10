@@ -84,7 +84,7 @@ export default class InputNumber extends Component {
       <View className='comp-input-number' >
         { this.judgeexits(existsitem)  ? <View className='comp-input-number'>
         <View  className='comp-input-number__minus' onClick={()=>this.handleMinus(existsitem,itemid)}>
-           <AtIcon value='subtract-circle' size='22' />
+           <AtIcon color="#E6DCCC" value='subtract-circle' size='22' />
           </View>
           <View
             className='comp-input-number__num'
@@ -97,7 +97,7 @@ export default class InputNumber extends Component {
           className='comp-input-number__plus'
           onClick={()=>this.handlePlus(existsitem,item)}
         >
-      <AtIcon value='add-circle' size='22' />
+      <AtIcon  color="#BF2E21" value='add-circle' size='22' />
         </View>
       </View>
     )
