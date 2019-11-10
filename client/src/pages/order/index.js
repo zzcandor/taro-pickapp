@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text,Image } from '@tarojs/components'
-import { AtIcon,AtActionSheet, AtActionSheetItem } from "taro-ui"
+import { View, Text,Image,CoverView ,ScrollView} from '@tarojs/components'
+import { AtIcon,AtActionSheet, AtActionSheetItem,AtInput,AtTextarea  } from "taro-ui"
 import { CheckboxItem, InputNumber } from '@components'
 import './index.scss'
 
@@ -56,12 +56,24 @@ class Index extends Component {
   componentDidMount () {
            this.setState({
                   addressfull:this.props.addressstore.addressfull})
+                   Taro.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'getaddress',
+          data: {
+          }
+        }
+      }).then(res=>{this.props.addressstore.parseaddresslist(res.result.data)})
+        .catch(err => {
+            console.log(err)
+      })
   }
 
   componentWillUnmount () { }
 
   componentDidShow () {
     this.setState({openaction:false})
+
   }
 
   componentDidHide () { }
@@ -79,29 +91,38 @@ class Index extends Component {
 
     handlebzChange (e) {
     this.setState({
-      dbeizhu:e.detail.value
+      beizhu:e.target.value
     })
-      console.log(e.detail.value)
+      console.log(e.target.value)
     // 在小程序中，如果想改变 value 的值，需要 `return value` 从而改变输入框的当前值
-    return e.detail.value
+    return e.target.value
   }
+
 
 
   render () {
     const curod=this.state.currentorder
     const orderdetail=this.state.orderdetail
     const {addressstore:{addresslist,addressfull}}=this.props
+    console.log("addressfull",!!addressfull)
     return (
-<View  >
+      <View>
+      {!this.state.showbz?
+<ScrollView >
       {this.state.loaded ?
    <View class="container">
     <View class="header-c"  >
       <View class="delivery" >
         <View class="address-c" >
+          {this.state.addressfull?
           <View class="address" onClick={()=>{this.setState({openaction:true})}}>
             <span class="address-info">{this.state.addressfull.address}</span>
             <span class="user-info">{this.state.addressfull.name} {this.state.addressfull.phone}</span>
+          </View>:  <View class="address" onClick={()=>{this.setState({openaction:true})}}>
+            <span class="address-info">选择收货地址</span>
           </View>
+          }
+
           <AtIcon value='chevron-right' size='20' color="gray"/>
         </View>
         <View class="line-sp" />
@@ -131,13 +152,18 @@ class Index extends Component {
           </View>
         </View>
 
-    <View class="bottom-c">
+    <View class="bottom-c" onClick={()=>this.setState({showbz:true})}>
       <View class="b-mid">
-        <Text class="mid-l">备注</Text>
-          <Input  class="mid-2" value={this.state.beizhu} onChange={this.handlebzChange.bind(this)}  placeholder="填写备注" placeholder-style="font-size: 24rpx" />
+        <span class="mid-l">备注</span>
+        <View class="mid-r">
+          <span>{this.state.beizhu||"这里是备注"}</span>
+           <AtIcon value='chevron-right' size='20' color="gray"/>
+        </View>
       </View>
       <View class="line-sp" />
     </View>
+
+
 
     <View class="pay-btn" >
       <View class="top">
@@ -145,6 +171,7 @@ class Index extends Component {
       </View>
     </View>
 
+     <CoverView>
     <AtActionSheet isOpened={this.state.openaction} cancelText='取消' title='选择收货地址' onCancel={ this.handleCancel } onClose={ this.handleClose }>
       {addresslist.map(item => (
       <AtActionSheetItem  key={item.address} onClick={ ()=>this.updateadcheck(item) }>
@@ -172,13 +199,20 @@ class Index extends Component {
         </View>
       </AtActionSheetItem>
     </AtActionSheet>
-
-   </View>
-
-
-
-       : <View>生成订单中...</View>}
-</View>
+     </CoverView>
+   </View> : <View>生成订单中...</View>}
+</ScrollView>:
+        <View>
+        <AtTextarea
+          count={false}
+          value={this.state.beizhu}
+          onChange={this.handlebzChange.bind(this)}
+          maxLength={200}
+          placeholder='备注.....'
+        />
+         <Button  onClick={()=>this.setState({showbz:false})}>保存</Button>
+        </View>
+          }</View>
     )
   }
 }

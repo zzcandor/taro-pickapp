@@ -1,0 +1,14 @@
+.about{
+  display: flex;
+  padding: 300px 0 300px 120px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 1200px;
+  background-image:url('http://img.yesebaby.com/images/201502/goods_img/5965_P_1422930284015.jpg') ;
+  background-size:cover;
+  .text{
+    margin: 10px 0px 10px 0;
+    color:black;
+  }
+}

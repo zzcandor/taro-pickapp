@@ -150,7 +150,7 @@ class User extends Component {
           <View
             className="item"
           >
-            <View className="left">
+            <View className="left"   onClick={()=>{Taro.navigateTo({url: '/pages/about/index'})}}>
               <Image className="icon-left" src={about_img} />
               <Text>关于</Text>
             </View>

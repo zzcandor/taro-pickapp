@@ -38,7 +38,8 @@ class App extends Component {
       'pages/user/user',
       'pages/order/index',
       'pages/addaddress/index',
-      'pages/addresslist/index'
+      'pages/addresslist/index',
+      "pages/about/index"
 
 
     ],

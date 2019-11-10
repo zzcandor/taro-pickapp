@@ -482,17 +482,16 @@
     .b-mid {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       height: 88px;
       .mid-l {
         font-size: 28px;
         color: $textBlack-color;
-        width:50px
       }
       .mid-2 {
         margin-left: 20px;
         font-size: 28px;
         color: $textBlack-color;
-        width:600px
       }
 
       .mid-r {

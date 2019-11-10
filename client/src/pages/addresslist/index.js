@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text,Input } from '@tarojs/components'
 import { AtTextarea,AtActionSheetItem,AtIcon} from 'taro-ui'
-import { CheckboxItem, InputNumber } from '@components'
+import { CheckboxItem, InputNumber,Loading} from '@components'
 import './index.scss'
 
 
@@ -18,11 +18,25 @@ class Index extends Component {
 
   state = {
     loaded: false,
-    showmap:false
+    showmap:false,
+    addresslist:[],
   }
 
 
-  componentWillMount () {
+    componentWillMount () {
+    Taro.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'getaddress',
+          data: {
+          }
+        }
+      }).then(res=>{this.setState({
+              addresslist:res.result.data
+        })})
+        .catch(err => {
+            console.log(err)
+      })
   }
 
   componentDidMount () {
@@ -30,6 +44,20 @@ class Index extends Component {
   componentDidUpdate(){
   }
   componentDidShow(){
+       Taro.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'getaddress',
+          data: {
+          }
+        }
+      }).then(res=>{this.setState({
+              addresslist:res.result.data,
+              loaded:true,
+        })})
+        .catch(err => {
+            console.log(err)
+      })
   }
 
   componentWillUnmount(){  //清除当前状态
@@ -48,9 +76,10 @@ class Index extends Component {
     const {addressstore:{addresslist}}=this.props
 
     return (
-
+      <View>
+      {this.state.loaded ?
     <View class="container">
-      {addresslist.map(item => (
+      {this.state.addresslist.map(item => (
       <View  key={item.address} onClick={ ()=>this.updateadcheck(item) }>
         <View class="popitem" >
         <View class="i-l">
@@ -71,7 +100,8 @@ class Index extends Component {
         <View className="xingzeng">新增收货地址</View>
         </View>
       </View>
-  </View>
+  </View>:<Loading/>}
+      </View>
 
     )
   }

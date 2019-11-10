@@ -234,9 +234,8 @@ const cartstore = observable({
 
 const addressstore = observable({
   address: '', //注意这里是集合不要{}字典！
-  addressfull:{},
-  addresslist:[{address:"广东省深圳市宝安区龙光大厦",name:"吴先生",phone:"13112223250"},{address:"广东省汕头市广东省深圳市宝安区龙光大厦龙光大厦",name:"jack",phone:"1236568"},{address:"广东省汕头市",name:"jack",phone:"1236568"}],
-
+  addresslistex:[{address:"广东省深圳市宝安区龙光大厦",name:"吴先生",phone:"13112223250"},{address:"广东省汕头市广东省深圳市宝安区龙光大厦龙光大厦",name:"jack",phone:"1236568"},{address:"广东省汕头市",name:"jack",phone:"1236568"}],
+  addresslist:[],
   showmap:false,
   updateaddress(address) {
     this.address=address
@@ -249,6 +248,9 @@ const addressstore = observable({
   },
   updateaddresslist(e){
     this.addresslist.push(e)
+  },
+  parseaddresslist(e){
+    this.addresslist=e
   },
   updatecheck(sid){
     const newcartlist = [];

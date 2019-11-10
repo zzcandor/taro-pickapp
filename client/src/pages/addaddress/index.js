@@ -39,6 +39,24 @@ class Index extends Component {
        this.setState({showmap:false,
                   address:''})
   }
+
+    createaddress=(addressdict)=>{
+      wx.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'addaddress',
+          data: {
+            addressdict
+          }
+        }
+      }).then(res=>{
+            console.log(res) })
+        .catch(err => {
+            console.log(err)
+      })
+  }
+
+
   submit=()=>{
     const newad={
       address:this.state.address,
@@ -49,6 +67,7 @@ class Index extends Component {
     this.props.addressstore.updateaddressfull(newad)
     this.props.addressstore.updatecheck(newad);
     this.props.addressstore.updateaddresslist(newad)
+    this.createaddress(newad)
     Taro.navigateBack()
 
   }
