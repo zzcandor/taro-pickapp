@@ -37,7 +37,7 @@ export default class Footer extends Component {
             console.log('调用函数后取得的数据',res.result.data.data)
                   const combineurl='/pages/order/index'
                   Taro.navigateTo({url:combineurl })
-                  this.setState({disabled:false})  })
+                  this.setState({disabled:false});this.clearcart()})
         .catch(err => {
             console.log(err)
       })
@@ -48,26 +48,14 @@ export default class Footer extends Component {
     this.setState({disabled:true})
     const orderdetail=this.props.cartstore.gencheckedlist()
     this.createorder(orderdetail)
-    let out_trade_no=wxPayUtil.getOrderNo("WA");
-    //支付金额 单位：元
-    let total_fee='0.10';
-    //支付商户号，登录YunGouOS.com 申请 支持资质个人申请
-    //商品简称
-    let body='情趣小店';
-    //回调地址
-    let notify_url='';
 
-    let attach="我是附加参数，我会在被原路传送到回调地址";
-
-    let title='黑的杰克收银台'//收银台标题显示名称 xxx-收银台
-
-    /*wxPayUtil.toPay(out_trade_no,total_fee,body,notify_url,attach,title,(response)=>{
-        console.log(response);
-	    //您的业务
-      });   */
-    //上面是调用支付的。
   }
 
+
+  clearcart=()=>{
+    this.props.cartstore.clearcartst()
+     Taro.clearStorage({key:'cart'})
+  }
 
 
   render () {

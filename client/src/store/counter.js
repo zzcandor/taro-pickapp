@@ -7,6 +7,10 @@ const counterStore = observable({
   userinfost:{},
   openid:"",
   loginstatest:'',
+  globalData:{},
+  updateglobaldata(e){
+    this.globalData=e
+  },
   localtost(localinfo){
     this.userinfost=localinfo
     if (localinfo){
@@ -22,11 +26,12 @@ const counterStore = observable({
     this.openid=id
   },
   getcate(){
-    return axios.get('https://gitee.com/blackjack0v0/ShuJuKu/raw/master/allgoods.json')
-    //使用return返回promise方便在componentDidMount中调用
-      .then(res => {
-           this.category=res.data;
-           const newmenu=res.data.map(item=>item.catename)
+    return wx.cloud.callFunction({ //调用云函数
+        name:'http',//云函数名为http
+        data:{url:'https://gitee.com/blackjack0v0/ShuJuKu/raw/master/allgoods.json'}
+        }).then(res => { console.log("云端调用返回",res)
+           this.category=res.result;
+           const newmenu=res.result.map(item=>item.catename)
            this.menu=newmenu
            console.log(newmenu)
         //使用map函数来对集合中的对象{}操作时可以采用解构写法！
@@ -35,8 +40,18 @@ const counterStore = observable({
            //console.log("访问api后返回")
            //console.log(res.data.data.categoryList)
            //console.log(this.menu)
-           return  res.data
+           return  res.result
          })
+
+
+
+        //使用map函数来对集合中的对象{}操作时可以采用解构写法！
+           //const menu2=res.data.data.categoryList.map(({ id, name }) => ({ id, name }))
+           //this.menu=menu2
+           //console.log("访问api后返回")
+           //console.log(res.data.data.categoryList)
+           //console.log(this.menu)
+
   }
 
 })
@@ -77,6 +92,10 @@ const cartstore = observable({
     this.cart=cart
     this.sumcount()
     this.sumprice()
+  },
+
+  clearcartst(){
+    this.cart=[]
   },
 
   addtocart(goodsinfo){
@@ -161,7 +180,7 @@ const cartstore = observable({
   updatecheck(sid, checkstate) {
     const newcartlist = [];
     this.cart.map((item) => {
-      if (sid === item.id) {
+      if (sid === item) {
         const newitem = {...item, checked: !checkstate}
         newcartlist.push(newitem)
         console.log('更新购物车内商品状态为', newitem)
@@ -252,18 +271,46 @@ const addressstore = observable({
   parseaddresslist(e){
     this.addresslist=e
   },
+  renewaddresslist(id,updateitem){
+
+    const newcartlist = [];
+    this.addresslist.map((item) => {
+      if (id === item._id) {
+        newcartlist.push(updateitem)
+        console.log('更新购物车内商品状态为', updateitem)
+      }
+      else {
+        newcartlist.push(item)
+      }
+    })
+    this.addresslist = newcartlist
+  },
+
+  delete(id){
+    const newcartlist = [];
+    this.addresslist.map((item) => {
+      if (id === item._id) {
+        console.log('删除内容id号为',id)
+      }
+      else {
+        newcartlist.push(item)
+      }
+    })
+    this.addresslist = newcartlist
+  },
+
   updatecheck(sid){
     const newcartlist = [];
     this.addresslist.map((item) => {
-      if (sid === item) {
-        const newitem = {...item, checked: true}
+      if (sid === item._id) {
+        item["checked"]=true;
+        const newitem =item
         newcartlist.push(newitem)
-        console.log('更新购物车内商品状态为', newitem)
+        console.log('更新检查状态为！', newitem)
       }
       else {
         const newitem = {...item, checked: false}
         newcartlist.push(newitem)
-        console.log('更新购物车内商品状态为', newitem)
       }
     })
     this.addresslist = newcartlist

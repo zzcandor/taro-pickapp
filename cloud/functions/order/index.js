@@ -12,16 +12,16 @@ exports.main = async (event,context) => {
 
   let res
 
-  if (func === 'getBalance') {
-    res = await getBalance(db, data)
+  if (func === 'updatepay') {
+    res = await updatepay(db, data)
   } else if (func === 'creatorder') {
     res = await addOrder(db, data)
   } else if (func === 'getorder') {
     res = await getorder(db, data)
-  } else if (func === 'getOrderDetail') {
-    res = await getOrderDetail(db, data)
-  } else if (func === 'cancelOrder') {
-    res = await cancelOrder(db, data)
+  } else if (func === 'updateorder') {
+    res = await updateorder(db, data)
+  } else if (func === 'getallorder') {
+    res = await getallorder(db, data)
   }
 
   return {
@@ -67,3 +67,54 @@ async function getorder (db, data) {
 
   return orderData
 }
+
+
+async function updateorder (db, data) {
+  const { _id,neworder } = data
+  const orderColl = db.collection('order')
+  const _ = db.command
+
+  const res = await orderColl.doc(_id).update({data:neworder})
+
+  const orderData = res
+  console.log('更新数据库内容',res)
+
+  return orderData
+}
+
+
+async function updatepay (db, data) {
+  const { _id } = data
+  const orderColl = db.collection('order')
+  const _ = db.command
+
+  const res = await orderColl.doc(_id).update({data:{ispaid:true}})
+
+  const orderData = res
+  console.log('更新数据库内容',res)
+
+  return orderData
+}
+
+
+
+async function getallorder (db, data) {
+  const openid=cloud.getWXContext().OPENID
+  const orderColl = db.collection('order')
+  const _ = db.command
+  const res = await orderColl.where({
+          owner: openid,
+        })
+        .get({
+          success: function(res) {
+            // res.data 是包含以上定义的两条记录的数组
+            console.log(res.data)
+          }
+        })
+
+  const orderData =res
+  console.log('查询所有订单内容',res.data)
+
+  return orderData
+}
+

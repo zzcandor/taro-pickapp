@@ -13,6 +13,7 @@ export default class chooseaddress extends Component {
   constructor() {
     super(...arguments);
     this.state = {
+      msg:"子组件信息",
       currentaddress:'',
       latitude: 35.970538, // 纬度
       longitude: 120.259514, // 经度
@@ -134,8 +135,22 @@ export default class chooseaddress extends Component {
    * 列表项点击事件
    */
   handleNearbyClick = (address,latitude, longitude) => {
+
+    let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+
+    let prevPage = pages[ pages.length - 2 ];
+
+    //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
+
+    prevPage.setData({  // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+
+        address : address
+
+    })
+
+
     this.props.addressstore.updateaddress(address)
-    this.props.addressstore.updateshow(false)
+    //this.props.addressstore.updateshow(false)
     // 设置当前位置
     const obj = {
       // 标记点
@@ -148,7 +163,10 @@ export default class chooseaddress extends Component {
       latitude: latitude, // 纬度
       longitude: longitude, // 经度,
     });
+
+    wx.navigateBack()
   };
+
 
   /**
    * marker 点击事件
@@ -184,7 +202,6 @@ export default class chooseaddress extends Component {
      });
      this.searchfujin(res.latitude,res.longitude)
   }
-
 
 
 

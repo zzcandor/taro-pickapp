@@ -104,10 +104,19 @@ class User extends Component {
                 {userinfost.nickName||userinfo.nickName|| '请登录 >'}
               </View>
               <View className="msg">
-                <View  className="msg msgpic" >
+                <View  className="msg msgpic"  >
                   <Image  mode="aspectFit" src={message_img} />
                 </View>
-                <View className="msg msgpic" >
+                <View className="msg msgpic" onClick={()=>wx.openSetting({
+                                          success: (res) => {
+                                            /*
+                                             * res.authSetting = {
+                                             *   "scope.userInfo": true,
+                                             *   "scope.userLocation": true
+                                             * }
+                                             */
+                                          }
+                                        })} >
                   <Image
                     mode="aspectFit"
                     src="http://static-r.msparis.com/uploads/9/a/9a00ce9a5953a6813a03ee3324cbad2a.png"
@@ -122,7 +131,7 @@ class User extends Component {
         </View>
         <View className="login">
           <View
-            className="item"
+            className="item"  onClick={()=>Taro.navigateTo({url:"/pages/orderlist/index"})}
           >
             <View className="left">
               <Image className="icon-left" src={all_img} />
@@ -147,10 +156,8 @@ class User extends Component {
             </View>
           </View>
 
-          <View
-            className="item"
-          >
-            <View className="left"   onClick={()=>{Taro.navigateTo({url: '/pages/about/index'})}}>
+          <View className="item"  onClick={()=>{Taro.navigateTo({url: '/pages/about/index'})}}    >
+            <View className="left"   >
               <Image className="icon-left" src={about_img} />
               <Text>关于</Text>
             </View>

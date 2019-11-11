@@ -17,7 +17,6 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
-
 //在app中引入store,可以引入多个store，使用时@inject( 'counterStore')指明store即可
 const store = {
   counterStore:counterStore,
@@ -26,8 +25,18 @@ const store = {
 
 }
 
+
+
+
 class App extends Component {
  //在路由修改首页，放在前面的就是首页，组件不要放在路由里
+
+  globalData={
+	payStatus:null,//支付状态
+	orderNo:null//订单号
+  }
+
+
   config = {
     navigateToMiniProgramAppIdList: [
     "wxd9634afb01b983c0"],
@@ -39,7 +48,10 @@ class App extends Component {
       'pages/order/index',
       'pages/addaddress/index',
       'pages/addresslist/index',
-      "pages/about/index"
+      "pages/about/index",
+      "pages/map/index",
+      "pages/remark/index",
+      "pages/orderlist/index"
 
 
     ],
@@ -86,7 +98,29 @@ class App extends Component {
     }
   }
 
-  componentDidShow () {}
+  componentDidShow () {
+    let extraData=this.$router.params.referrerInfo.extraData
+    console.log("跳转小程序后带的值",this.$router.params.referrerInfo.extraData)
+    console.log(extraData)
+
+if(extraData){
+  //不管成功失败 先把支付结果赋值
+  this.globalData.payStatus=extraData.code===0?true:false;
+  if(extraData.code!==0){
+    wx.showToast({
+      title: extraData.msg,//错误提示
+      icon: 'none',
+      duration: 3000
+    });
+      return
+
+  }
+  //支付成功
+ this.globalData.orderNo=extraData.data.orderNo;
+  console.log("全局变量为",this.globalData)
+  counterStore.updateglobaldata(this.globalData)
+}
+  }
 
   componentDidHide () {}
 

@@ -23,13 +23,22 @@ class Index extends Component {
 
 
   componentWillMount () {
+    if (this.$router.params.addressfull){
+    console.log("参数",this.$router.params.addressfull)
+    const addressfull=JSON.parse(this.$router.params.addressfull);
+    this.setState({
+      name:addressfull.name,
+      phone:addressfull.phone,
+      detail:addressfull.detail,
+      address:addressfull.address,
+      id:addressfull._id,
+    })}
   }
+
 
   componentDidMount () {
   }
   componentDidUpdate(){
-    this.setState({showmap:this.props.addressstore.showmap,
-                  address:this.props.addressstore.address})
   }
   componentDidShow(){
   }
@@ -40,7 +49,7 @@ class Index extends Component {
                   address:''})
   }
 
-    createaddress=(addressdict)=>{
+  createaddress=(addressdict)=>{
       wx.cloud.callFunction({
         name: 'address',
         data: {
@@ -50,27 +59,86 @@ class Index extends Component {
           }
         }
       }).then(res=>{
-            console.log(res) })
+            console.log("创建地址后返回",res);
+        this.props.addressstore.updateaddresslist(res.result.data.data)
+        this.props.addressstore.updatecheck(res.result.data.data._id);Taro.navigateBack() })
+        .catch(err => {
+            console.log(err)
+      })
+  }
+
+    updateaddress=(addressdict,id)=>{
+      wx.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'updateaddress',
+          data: {
+            addressdict,id
+          }
+        }
+      }).then(res=>{
+            console.log(res);
+             this.props.addressstore.renewaddresslist(id,res.result.data.data)
+            this.props.addressstore.updatecheck(id);Taro.navigateBack() })
         .catch(err => {
             console.log(err)
       })
   }
 
 
-  submit=()=>{
+  submit=(address)=>{
     const newad={
-      address:this.state.address,
+      address:address,  //不能直接通过this.state.address获取 不然会取得空值
+      detail:this.state.detail,
       name:this.state.name,
       phone:this.state.phone,
       checked:true,}
-
+    console.log(newad)
     this.props.addressstore.updateaddressfull(newad)
-    this.props.addressstore.updatecheck(newad);
-    this.props.addressstore.updateaddresslist(newad)
     this.createaddress(newad)
-    Taro.navigateBack()
+
 
   }
+
+
+    update=(address,id)=>{
+    const newad={
+      address:address,  //不能直接通过this.state.address获取 不然会取得空值
+      detail:this.state.detail,
+      name:this.state.name,
+      phone:this.state.phone,
+      }
+    console.log(newad)
+    this.props.addressstore.updateaddressfull(newad)
+    this.updateaddress(newad,id)
+
+
+  }
+
+
+
+    delete=(id)=>{
+     wx.cloud.callFunction({
+        name: 'address',
+        data: {
+          func: 'deleteaddress',
+          data: {
+            id
+          }
+        }
+      }).then(res=>{
+            console.log(res);this.props.addressstore.delete(id);Taro.navigateBack() })
+        .catch(err => {
+            console.log(err)
+      })
+
+
+
+
+
+  }
+
+
 
     handlenameChange (e) {
     this.setState({
@@ -101,21 +169,21 @@ class Index extends Component {
 
 
 
+
   render () {
     const {addressstore:{showmap,address}}=this.props
 
     return (
-      !this.state.showmap?
       <View className="container">
         <View className="name">
           <span>联系人：</span>
-          <Input className="input" value={this.state.name}  onChange={this.handlenameChange.bind(this)} placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx"/>
+          <Input  className="input" value={this.state.name}  onChange={this.handlenameChange.bind(this)} placeholder="请填写收货人的姓名" placeholder-style="font-size: 24rpx"/>
         </View>
         <View className="phone">
           <span>手机号：</span>
-          <Input className="input" value={this.state.phone} onChange={this.handlephoneChange.bind(this)}   placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx"/>
+          <Input   className="input" value={this.state.phone} onChange={this.handlephoneChange.bind(this)}   placeholder="请填写收货人手机号码" placeholder-style="font-size: 24rpx"/>
         </View>
-        <View className="address"  onClick={()=>{this.props.addressstore.updateshow(true);this.setState({showmap:true})}}>
+        <View className="address"  onClick={()=>{Taro.navigateTo({url:"/pages/map/index"})}}>
           <span >收货地址：</span>
           <View className="m">
             <p> {this.state.address?<span>{this.state.address}</span>:<span>点击选择</span>}</p>
@@ -125,12 +193,18 @@ class Index extends Component {
         </View>
         <View className="house-num">
           <span>门牌号：</span>
-          <Input className="input"  value={this.state.detail} onChange={this.handledtChange.bind(this)}  placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" />
+          <Input    className="input"  value={this.state.detail} onChange={this.handledtChange.bind(this)}  placeholder="详细地址，例：16号楼5楼301室" placeholder-style="font-size: 24rpx" />
         </View>
-        <View className="submit"  onClick={this.submit}>
-          <span>保存地址</span>
-        </View>
-      </View>:<chooseaddress/>
+
+        {this.state.id?
+        <Button  onClick={this.update.bind(this,this.state.address,this.state.id)}>
+          更新地址</Button>:
+        <Button  onClick={this.submit.bind(this,this.state.address)}>
+          保存地址</Button>}
+          {this.state.id && <Button type="warn" onClick={this.delete.bind(this,this.state.id)}>
+            删除</Button>
+          }
+      </View>
     )
   }
 }

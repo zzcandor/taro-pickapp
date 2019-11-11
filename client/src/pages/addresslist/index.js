@@ -83,13 +83,14 @@ class Index extends Component {
       <View  key={item.address} onClick={ ()=>this.updateadcheck(item) }>
         <View class="popitem" >
         <View class="i-l">
-          <span class="address">{item.address} </span>
+          <span class="address">{item.address}{item.detail} </span>
           <View class="user-info">
             <span class="s-l">{item.name}</span>
             <span class="s-r">{item.phone}</span>
           </View>
         </View>
-          <AtIcon  value='edit' size='30' />
+          <AtIcon  value='edit' size='30'
+           onClick={()=>{console.log("内容",item,`${item}`);Taro.navigateTo({ url: "/pages/addaddress/index?addressfull="+JSON.stringify(item)})}}/>
       </View>
       </View>
         ))}
