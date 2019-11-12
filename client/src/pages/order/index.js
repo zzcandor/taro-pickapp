@@ -124,7 +124,7 @@ class Index extends Component {
   }
 
     submit(e){  //发送通知
-    if(this.state.addressfull){
+    if(this.props.addressstore.addressfull){
     axios.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx3011a047f254103f&secret=7792462e3dbe1b82cdbf8f492215c7a9')
       .then(res=>{
         console.log("返回值",res)

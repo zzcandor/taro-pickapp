@@ -18,7 +18,11 @@ class Index extends Component {
 
   state = {
     loaded: false,
-    showmap:false
+    showmap:false,
+    name:"",
+    phone:"",
+    address:"",
+    detail:"",
   }
 
 

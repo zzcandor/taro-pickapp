@@ -96,6 +96,7 @@ const cartstore = observable({
 
   clearcartst(){
     this.cart=[]
+     this.cartid=[]
   },
 
   addtocart(goodsinfo){
